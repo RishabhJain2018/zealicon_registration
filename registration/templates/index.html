@@ -1,0 +1,73 @@
+{% load staticfiles %}
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Register </title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{% static "css/style.css" %}">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="{% static "js/showhide.js" %}"></script>
+</head>
+	<body class="white-text">
+		<section class="container-fluid">
+			<div class="mainContainer" style="opacity:0.9;">
+				<h1 class="text-center"> Registration Form </h1>
+				<form role="form" method="POST" action="" id="registerform">
+					{% csrf_token %}
+					<div class="form-group">
+						<label class="control-label" for ="name"> Name : </label>
+						<input id="name" name="name" type="text" placeholder="Enter your name" class="form-control input md" required>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="email"> Email : </label>
+						<input id="email" name="email" type="email" placeholder="Enter your Email" class="form-control input md" required>
+					</div>
+					<div>
+						<label class="control-label" for="course"> Course : </label>
+						<select  id="course" name="course">
+							<option value="Btech"> Btech </option>
+							<option value="MBA"> MBA </option>
+							<option value="MCA">MCA </option>
+							<option value="MAM">MAM</option>
+						</select>
+					</div>
+					<div id="branch">
+						<label class="control-label" for="branch" > Branch : </label>
+						<select  name="branch">
+							<option value="CSE"> CSE </option>
+							<option value="MEC">MEC </option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for ="contact"> Contact : </label>
+						<input id="contact" name="contact" type="text" placeholder="Enter your Contact" pattern =".{10}"class="form-control input md" required>
+					</div>
+					<div>
+					<label class="control-label" for="college"> College : </label>
+						<select name="college" id="college">
+							<option value="JSS"> JSS </option>
+							<option value="OTHER"> OTHER </option>
+						</select>
+					</div>
+				<!-- 	<div class="form-group" id="collegename">
+						<label class="control-label" for="college_name"> College Name: </label>
+						<input type="text" id="college_name" name="college_name" placeholder="Enter the other college name" class="form-control input md">
+					</div> -->
+					<div>
+						<label class="control-label" for="year"> Year : </label>
+						<select  id="year" name="year">
+							<option value="FIRST">FIRST</option>
+							<option value="SECOND">SECOND</option>
+							<option value="THIRD">THIRD</option>
+							<option value="FOURTH">FOURTH</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<input type="submit" id="submitbtn" name="submitbtn" class="btn btn-primary" value="Register">
+					</div>
+				</form>
+			</div>
+		</section>
+	</body>
+</html>
