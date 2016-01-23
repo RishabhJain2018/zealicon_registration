@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/1.8/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
+
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -38,6 +39,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'regis',
+    'whoosh',
+    'haystack',
+    'ajax_search',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,3 +109,11 @@ STATIC_ROOT='/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR + "/static"),
     )
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:8000/',
+        'INDEX_NAME': 'haystack',
+    },
+}

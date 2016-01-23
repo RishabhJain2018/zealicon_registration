@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="{% static "css/style.css" %}">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="{% static "js/showhide.js" %}"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 	<body class="white-text">
 		<section class="container-fluid">
@@ -30,13 +31,20 @@
 							<option value="MBA"> MBA </option>
 							<option value="MCA">MCA </option>
 							<option value="MAM">MAM</option>
+							<option value="Mtech">Mtech</option>
 						</select>
 					</div>
 					<div id="branch">
 						<label class="control-label" for="branch" > Branch : </label>
 						<select  name="branch">
 							<option value="CSE"> CSE </option>
-							<option value="MEC">MEC </option>
+							<option value="IT">IT</option>
+							<option value="EE">EE </option>
+							<option value="ECE">ECE </option>
+							<option value="CE">CE</option>
+							<option value="IC">IC </option>
+							<option value="ME">ME </option>
+							<option value="MT">MT </option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -46,14 +54,14 @@
 					<div>
 					<label class="control-label" for="college"> College : </label>
 						<select name="college" id="college">
+							<option value="OTHER" selected="selected"> OTHER </option>
 							<option value="JSS"> JSS </option>
-							<option value="OTHER"> OTHER </option>
 						</select>
 					</div>
-				<!-- 	<div class="form-group" id="collegename">
+					<div class="form-group" id="collegename">
 						<label class="control-label" for="college_name"> College Name: </label>
 						<input type="text" id="college_name" name="college_name" placeholder="Enter the other college name" class="form-control input md">
-					</div> -->
+					</div>
 					<div>
 						<label class="control-label" for="year"> Year : </label>
 						<select  id="year" name="year">

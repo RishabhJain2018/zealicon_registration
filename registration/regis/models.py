@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Register(models.Model):
+	''' Registration models ''' 
 	CSE ='CSE'
 	IT = 'IT'
 	EE = 'EE'
@@ -25,11 +26,13 @@ class Register(models.Model):
 	MBA='MBA'
 	MAM='MAM'
 	MCA='MCA'
+	Mtech='Mtech'
 	COURSE=(
 		(Btech, 'Btech'),
 		(MBA,'MBA'),
 		(MAM,'MAM'),
 		(MCA,'MCA'),
+		(Mtech,'Mtech')
 		)
 
 	JSS='JSS'
@@ -52,11 +55,11 @@ class Register(models.Model):
 		)
 
 
-	name=models.CharField(max_length=200,blank=False)
-	email=models.EmailField(default=None, blank=False,unique=True)
-	course=models.CharField(max_length=10,choices=COURSE,default=Btech)
+	name=models.CharField(max_length=200,blank=True)
+	email=models.EmailField(max_length=200,default=None, blank=False,unique=True)
+	course=models.CharField(max_length=10,choices=COURSE,default=Btech,blank=True)
 	branch=models.CharField(max_length=10,choices=BRANCH,blank=True,default=None,null=True)
 	contact=models.CharField(max_length=10,blank=False,unique=True)
-	college=models.CharField(max_length=10,choices=COLLEGE,default=JSS)
-	college_name=models.CharField(max_length=200,blank=True,default=JSS,null=True)
-	year=models.CharField(max_length=1,choices=YEAR,default=FIRST)
+	college=models.CharField(max_length=200,choices=COLLEGE,blank=True,null=True)
+	college_name=models.CharField(max_length=200,blank=True,null=True)
+	year=models.CharField(max_length=200,choices=YEAR,default=FIRST)
