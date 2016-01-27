@@ -1,7 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-class Register(models.Model):
+class Participants_Details(models.Model):
 	''' Registration models ''' 
 	CSE ='CSE'
 	IT = 'IT'
@@ -54,11 +55,10 @@ class Register(models.Model):
 
 		)
 
-
 	name=models.CharField(max_length=200,blank=True)
 	email=models.EmailField(max_length=200,default=None, blank=False,unique=True)
 	course=models.CharField(max_length=10,choices=COURSE,default=Btech,blank=True)
-	branch=models.CharField(max_length=10,choices=BRANCH,blank=True,default=None,null=True)
+	branch=models.CharField(max_length=10,choices=BRANCH,blank=True,null=True,default=None)
 	contact=models.CharField(max_length=10,blank=False,unique=True)
 	college=models.CharField(max_length=200,choices=COLLEGE,blank=True,null=True)
 	college_name=models.CharField(max_length=200,blank=True,null=True)

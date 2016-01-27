@@ -1,8 +1,8 @@
 from django import forms
-from .models import Register
+from .models import Participants_Details
 
-class RegisterForm(forms.ModelForm):
+class ParticipantsForm(forms.ModelForm):
 	class Meta:
-		model = Register
+		model = Participants_Details
 		fields= '__all__'
 

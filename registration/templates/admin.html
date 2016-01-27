@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title> Admin Login </title>
+</head>
+<body>
+	
+	<h1> Admin Login </h1>
+<form method="POST" action=" ">
+	{% csrf_token %}
+	<label for="username"> Username : </label>
+	<input type="text" name="username" id="username">
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<br>
+	<label for="password"> Password : </label>
+	<input type="password" name="password" id="password">
+	<input type="submit" id="submitbtn" name="submitbtn" value="Login">
+</form>
+</body>
+</html>

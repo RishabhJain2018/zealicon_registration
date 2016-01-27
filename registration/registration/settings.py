@@ -39,9 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'regis',
-    'whoosh',
-    'haystack',
-    'ajax_search',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -110,10 +107,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR + "/static"),
     )
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:8000/',
-        'INDEX_NAME': 'haystack',
-    },
-}
+
+# ADMIN_LOGIN='admin'
+# ADMIN_PASSWORD = 'sha1$4e987$afbcf42e21bd417fb71db8c66b321e9fc33051de'
