@@ -6,8 +6,9 @@ from regis.views import ParticipantsView, FeesView, OrganizationView
 urlpatterns = [
 
    	url(r'^admin/', include(admin.site.urls)),
-    url(r'^home/', ParticipantsView.as_view(),name='home'),
+    url(r'^register/', ParticipantsView.as_view(),name='register'),
     url(r'^fees/', FeesView.as_view(),name='fees'),
-    url(r'^', OrganizationView.as_view()),
+    url(r'^', OrganizationView.as_view(), name='home'),
 
 ]
+

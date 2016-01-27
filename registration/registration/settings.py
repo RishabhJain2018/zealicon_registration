@@ -107,6 +107,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR + "/static"),
     )
 
-
-# ADMIN_LOGIN='admin'
-# ADMIN_PASSWORD = 'sha1$4e987$afbcf42e21bd417fb71db8c66b321e9fc33051de'
+    

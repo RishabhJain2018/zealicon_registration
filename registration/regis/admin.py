@@ -8,3 +8,4 @@ class ParticipantAdmin(admin.ModelAdmin):
 	search_fields = ('email',)
 
 admin.site.register(Participants_Details, ParticipantAdmin)
+
