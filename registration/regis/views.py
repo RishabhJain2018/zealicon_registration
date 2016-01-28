@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login
 def is_member(user, group_name):
 
 	# Checks for the multiple users in the Group
+
 	return Group.objects.get(name=group_name).user_set.filter(groups__name__in=['Quanta_user','Nibble_user']).exists()
 
 
@@ -29,7 +30,7 @@ class OrganizationView(View):
 			if str(group) == 'Quanta_user' and is_member(user, group):
 				if user is not None and user.is_active:
 					auth.login(request, user)
-					return HttpResponseRedirect('register/')
+					return render(request, 'index.html')
 
 			elif str(group) == 'Nibble_user' and is_member(user, group):
 				if user is not None and user.is_active:
@@ -39,13 +40,14 @@ class OrganizationView(View):
 		else:
 			return render(request, self.template_name)
 
-	
+
+
 
 class ParticipantsView(View):
 	'''Views to Register a Student ''' 
 
 	form_class= ParticipantsForm
-	template_name = 'index.html'
+	template_name = 'base.html'
 
 	def get(self, request):
 		form = self.form_class()
