@@ -1,11 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import ParticipantsForm
 from django.views.generic import View
 from regis.models import Participants_Details
 from django.contrib import auth
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User,Group
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponse, Http404
+from django.template import Context, Template
+from django.shortcuts import get_object_or_404
+
 
 def is_member(user, group_name):
 
@@ -41,13 +45,11 @@ class OrganizationView(View):
 			return render(request, self.template_name)
 
 
-
-
 class ParticipantsView(View):
 	'''Views to Register a Student ''' 
 
 	form_class= ParticipantsForm
-	template_name = 'base.html'
+	template_name = 'register.html'
 
 	def get(self, request):
 		form = self.form_class()
@@ -57,16 +59,13 @@ class ParticipantsView(View):
 		form=self.form_class(request.POST)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('fees/')
-		return render(request, self.template_name,{'form':form})
+			template='confirm_registration.html'
+			return redirect('fees/', Context={'form.cleaned_data': form.cleaned_data})
+		return render(request, self.template_name, {'form':form})
 
+def confirm_registration(request, Context):
+	return render(request, "confirm_registration.html", Context=Context)
 
-class FeesView(View):
-	''' Fee Submission views '''
+def receipts(request):
 
-	template_name='fees.html'
-
-	def get(self, request):
-		return render(request, self.template_name)
-
-		
+	return render(request, "receipt.html")
