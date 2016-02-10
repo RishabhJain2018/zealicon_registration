@@ -14,7 +14,6 @@ from django.shortcuts import get_object_or_404
 def is_member(user, group_name):
 
 	# Checks for the multiple users in the Group
-
 	return Group.objects.get(name=group_name).user_set.filter(groups__name__in=['Quanta_user','Nibble_user']).exists()
 
 
@@ -58,14 +57,15 @@ class ParticipantsView(View):
 	def post(self, request):
 		form=self.form_class(request.POST)
 		if form.is_valid():
+			data=form.cleaned_data
 			form.save()
-			template='confirm_registration.html'
-			return redirect('fees/', Context={'form.cleaned_data': form.cleaned_data})
-		return render(request, self.template_name, {'form':form})
+			return redirect('confirm_register.html', context={'data':data})
+		else:
+			return render(request, self.template_name, {'form':form})
 
-def confirm_registration(request, Context):
-	return render(request, "confirm_registration.html", Context=Context)
 
 def receipts(request):
-
 	return render(request, "receipt.html")
+
+
+	

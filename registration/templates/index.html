@@ -1,18 +1,22 @@
-<html>
-<head>
+{% extends "admin.html" %}
+{% block title %}
 	<title> Registration </title>
-</head>
-<body>
-	<h1> Zealicon 2K16 </h1>
-	<br>
-	<br>
+{% endblock %}
 
-	<a href="register/"> Register Offline </a>
-	<br>
-	<br>
-	<a href="online/"> Register Online </a>
+{% block sidebar %}
+<ul>
+	<li><a href="/regis/register"> Register</a> </li>
+{% endblock %}
 
 
+{% block content %}
 
-</body>
-</html>
+	<h1> Zealicon 2k16 </h1>
+	<br>
+	<br>
+	<a href="register/" style="text-align:center"> Register Offline </a>
+	<br>
+	<br>
+	<a href="online/" style="text-align:center"> Register Online </a>
+
+{% endblock %}
