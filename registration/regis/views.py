@@ -59,13 +59,11 @@ class ParticipantsView(View):
 		if form.is_valid():
 			data=form.cleaned_data
 			form.save()
-			return redirect('confirm_register.html', context={'data':data})
+			return render(request, 'confirm_registration.html' ,{'data':data})
 		else:
 			return render(request, self.template_name, {'form':form})
 
 
 def receipts(request):
-	return render(request, "receipt.html")
-
-
 	
+	return render(request, "receipt.html")

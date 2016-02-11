@@ -21,3 +21,15 @@ $(document).ready(function(){
 
 });
 
+$(function(){
+	var availableColleges=[
+	"JSS Academy of Technical Education",
+	"Jaypee Institute of Information & Technology",
+	"IIT Madras",
+	"IIT Indore",
+	 ]
+  $("#college").autocomplete({
+    source: availableColleges ,
+    minLength: 1,
+  });
+});
