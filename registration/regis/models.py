@@ -53,7 +53,7 @@ class Participants_Details(models.Model):
 	course=models.CharField(max_length=10,choices=COURSE,default=None,blank=True)
 	branch=models.CharField(max_length=10,choices=BRANCH,blank=True,null=True, default=None)
 	contact=models.CharField(max_length=10,blank=False,unique=True)
-	college=models.CharField(max_length=200,blank=False,null=False,default='JSS Academy of Technical Education')
+	college=models.CharField(max_length=200,blank=False,null=False,default=None)
 	year=models.CharField(max_length=200,choices=YEAR,default=FIRST)
 
 

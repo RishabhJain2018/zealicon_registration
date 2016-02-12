@@ -15,7 +15,7 @@ def is_member(user, group_name):
 
 	# Checks for the multiple users in the Group
 	return Group.objects.get(name=group_name).user_set.filter(groups__name__in=['Quanta_user','Nibble_user']).exists()
-
+		
 
 class OrganizationView(View):
 	''' Administartor Views '''
@@ -64,6 +64,6 @@ class ParticipantsView(View):
 			return render(request, self.template_name, {'form':form})
 
 
-def receipts(request):
-	
-	return render(request, "receipt.html")
+def thankyou(request):
+	if request.method=="GET":
+		return render(request, "final.html")

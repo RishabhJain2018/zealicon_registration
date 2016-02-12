@@ -1,6 +1,5 @@
 from django.contrib import admin
 from regis.models import Participants_Details
-from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
 class ParticipantAdmin(admin.ModelAdmin):

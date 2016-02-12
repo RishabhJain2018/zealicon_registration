@@ -35,15 +35,8 @@
 			{{data.year}}
 		</div>
 	</div>
-	<form method="POST">
+	<form method="POST" action="{% url 'thanks' %}">
 		{% csrf_token %}
-		<input type="hidden" name="name" value="{{form.name}}" >
-		<input type="hidden" name="email" value="{{form.email}}" >
-		<input type="hidden" name="course" value="{{form.course}}">
-		<input type="hidden" name="branch" value="{{form.branch}}" >
-		<input type="hidden" name="contact" value="{{form.contact}}" >
-		<input type="hidden" name="college" value="{{form.college}}" >
-		<input type="hidden" name="year" value="{{form.year}}" >
 		<input type="submit" value="Confirm" >
 	</form>
 </body>
