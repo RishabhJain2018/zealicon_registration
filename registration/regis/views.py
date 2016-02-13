@@ -12,7 +12,6 @@ from django.shortcuts import get_object_or_404
 
 
 def is_member(user, group_name):
-
 	# Checks for the multiple users in the Group
 	return Group.objects.get(name=group_name).user_set.filter(groups__name__in=['Quanta_user','Nibble_user']).exists()
 		
@@ -33,7 +32,7 @@ class OrganizationView(View):
 			if str(group) == 'Quanta_user' and is_member(user, group):
 				if user is not None and user.is_active:
 					auth.login(request, user)
-					return render(request, 'index.html')
+					return HttpResponseRedirect('index/')
 
 			elif str(group) == 'Nibble_user' and is_member(user, group):
 				if user is not None and user.is_active:
@@ -42,6 +41,9 @@ class OrganizationView(View):
 
 		else:
 			return render(request, self.template_name)
+
+def index(request):
+	return render(request, 'index.html')
 
 
 class ParticipantsView(View):
@@ -64,6 +66,6 @@ class ParticipantsView(View):
 			return render(request, self.template_name, {'form':form})
 
 
-def thankyou(request):
+def confirm(request):
 	if request.method=="GET":
 		return render(request, "final.html")
