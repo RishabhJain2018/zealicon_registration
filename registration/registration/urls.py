@@ -1,15 +1,16 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from regis.views import  OrganizationView, ParticipantsView 
+
 
 
 urlpatterns = [
 
-	url(r'^', OrganizationView.as_view(), name='home'),
 	url(r'^admin/', include(admin.site.urls)),
-   	url(r'^index/', include('regis.urls')),
-   	# url(r'^thanks/$', 'regis.views.thankyou', name='thanks'),
-    # url(r'^register/$', ParticipantsView.as_view(),name='register'),
+	url(r'^$', 'regis.views.administrator', name='base'),
+	url(r'^index/$', 'regis.views.index', name='index'),
+	url(r'^index/register/$','regis.views.participants_register', name='register'),
+	url(r'^index/register/confirm/$', 'regis.views.confirm', name='confirm'),
+
   
 
 ]

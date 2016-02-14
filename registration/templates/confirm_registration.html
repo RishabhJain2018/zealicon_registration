@@ -35,7 +35,7 @@
 			{{data.year}}
 		</div>
 	</div>
-	<form method="POST" action="{% url 'thanks' %}">
+	<form method="POST" action="{% url 'confirm' %}">
 		{% csrf_token %}
 		<input type="submit" value="Confirm" >
 	</form>

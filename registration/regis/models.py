@@ -48,13 +48,26 @@ class Participants_Details(models.Model):
 
 		)
 
-	name=models.CharField(max_length=200,blank=True)
+	name=models.CharField(max_length=200,blank=False, null=False)
 	email=models.EmailField(max_length=200,default=None, blank=False,unique=True)
-	course=models.CharField(max_length=10,choices=COURSE,default=None,blank=True)
-	branch=models.CharField(max_length=10,choices=BRANCH,blank=True,null=True, default=None)
+	course=models.CharField(max_length=10,choices=COURSE,default=None,blank=False)
+	branch=models.CharField(max_length=10,choices=BRANCH,blank=False,null=False, default=None)
 	contact=models.CharField(max_length=10,blank=False,unique=True)
 	college=models.CharField(max_length=200,blank=False,null=False,default=None)
 	year=models.CharField(max_length=200,choices=YEAR,default=FIRST)
+	zealidfinal = models.CharField(max_length=200, null=True, blank=True)
+
+class Participants_Online(models.Model):
+	zeal_id=models.CharField(max_length=200)
+	name=models.CharField(max_length=200)
+	email=models.EmailField(max_length=200)
+	course=models.CharField(max_length=200)
+	branch=models.CharField(max_length=200)
+	contact=models.CharField(max_length=10)
+	college=models.CharField(max_length=200)
+	year=models.CharField(max_length=200)
+
+
 
 
 	

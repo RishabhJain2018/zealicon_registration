@@ -18,7 +18,7 @@
 		<div id="content">
 	     {% block content %}
 	     <h1> Admin Login </h1>
-	 <form method="POST" action=" ">
+	 <form method="POST">
 		{% csrf_token %}
 		<label for="username"> Username : </label>
 		<input type="text" name="username" id="username">
