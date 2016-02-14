@@ -9,6 +9,11 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="{% static "js/showhide.js" %}"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+	<script> 
+</script>
 </head>
 	<body class="white-text">
 		<section class="container-fluid">
@@ -51,16 +56,12 @@
 						<label class="control-label" for ="contact"> Contact : </label>
 						<input id="contact" name="contact" type="text" placeholder="Enter your 10 digit Contact number" pattern ="\d{10}" maxlength=10 class="form-control input md" required>
 					</div>
-					<div>
-					<label class="control-label" for="college"> College : </label>
-						<select name="college" id="college">
-							<option value="OTHER" selected="selected"> OTHER </option>
-							<option value="JSS"> JSS </option>
-						</select>
-					</div>
-					<div class="form-group" id="collegename">
-						<label class="control-label" for="college_name"> College Name: </label>
-						<input type="text" id="college_name" name="college_name" placeholder="Enter the other college name" class="form-control input md">
+					<div class="form-group">
+						{% csrf_token %}
+						<label class="control-label" for="college"> College :</label>
+						<input type="text" id="college" name="college" placeholder="Enter the college name" class="form-control input md" required>
+						<ul id="search_results">
+						</ul>
 					</div>
 					<div>
 						<label class="control-label" for="year"> Year : </label>

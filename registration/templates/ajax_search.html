@@ -1,0 +1,13 @@
+{% if zealids.count > 0 %}
+
+{% for zealid in zealids %}
+
+    <li> {{ zealid.name }} </li>
+
+{% endfor %}
+
+{% else %}
+
+<li> None to Show ! </li>
+
+{% endif %}
