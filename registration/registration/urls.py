@@ -5,10 +5,12 @@ from regis.views import  OrganizationView, ParticipantsView
 
 urlpatterns = [
 
-   	url(r'^admin/', include(admin.site.urls)),
-   	url(r'^register.fees/receipt/$','regis.views.receipts', name='receipt'),
-    url(r'^register/$', ParticipantsView.as_view(),name='register'),
-    url(r'^', OrganizationView.as_view(), name='home'),
+	url(r'^', OrganizationView.as_view(), name='home'),
+	url(r'^admin/', include(admin.site.urls)),
+   	url(r'^index/', include('regis.urls')),
+   	# url(r'^thanks/$', 'regis.views.thankyou', name='thanks'),
+    # url(r'^register/$', ParticipantsView.as_view(),name='register'),
+  
 
 ]
 
