@@ -28,16 +28,28 @@
 		</div>
 		<div class="form-group"> 
 			<label> College : </label>
-			{{data.college}}
+			{{data.college_name}}
 		</div>
+		<!-- <div class="form-group"> 
+			<label>  </label>
+			{{}}
+		</div> -->
 		<div class="form-group"> 
 			<label> Year </label>
 			{{data.year}}
 		</div>
 	</div>
-	<form method="POST" action="{% url 'confirm' %}">
+	<!-- <form method="POST">
 		{% csrf_token %}
-		<input type="submit" value="Confirm" >
-	</form>
+		<input type="hidden" name="name" value="{{form.name}}" >
+		<input type="hidden" name="email" value="{{form.email}}" >
+		<input type="hidden" name="course" value="{{form.course}}">
+		<input type="hidden" name="branch" value="{{form.branch}}" >
+		<input type="hidden" name="contact" value="{{form.contact}}" >
+		<input type="hidden" name="college" value="{{form.college}}" >
+		<input type="hidden" name="college_name" value"{{form.college_name}}" >
+		<input type="hidden" name="year" value="{{form.year}}" >
+		<input type="submit" value="Confirm" >	
+	</form> -->
 </body>
 </html>

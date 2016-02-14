@@ -8,12 +8,12 @@ body{
 		background-color: #0c0c0c;
 
 	}
-/*#sidebar {
+#sidebar {
 		float: left;
 		width: 200px;
 		border: 1px solid black;
 
-	}*/
+	}
  #content {
 		float: left;
 		width: 600px;
