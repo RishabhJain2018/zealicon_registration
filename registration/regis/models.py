@@ -58,7 +58,7 @@ class Participants_Details(models.Model):
 	zealidfinal = models.CharField(max_length=200, null=True, blank=True)
 
 class Participants_Online(models.Model):
-	zeal_id=models.CharField(max_length=200)
+	zealid=models.CharField(max_length=200)
 	name=models.CharField(max_length=200)
 	email=models.EmailField(max_length=200)
 	course=models.CharField(max_length=200)

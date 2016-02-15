@@ -9,7 +9,7 @@ class ParticipantAdmin(admin.ModelAdmin):
 
 
 class ParticipantOnline(admin.ModelAdmin):
-	list_display = ('zeal_id','name','email','course','branch','contact','college','year',)
+	list_display = ('zealid','name','email','course','branch','contact','college','year',)
 	
 
 admin.site.register(Participants_Details, ParticipantAdmin)

@@ -1,8 +1,14 @@
 {% if zealids.count > 0 %}
 
-{% for zealid in zealids %}
+{% for zeal in zealids %}
 
-    <li> {{ zealid.name }} </li>
+    <li> {{ zeal.name }} </li>
+    <li> {{zeal.email}} </li>
+    <li> {{zeal.course}} </li>
+    <li> {{zeal.branch}} </li>
+    <li> {{zeal.contact}} </li>
+    <li> {{zeal.college}} </li>
+    <li> {{zeal.year}} </li>
     
 
 {% endfor %}

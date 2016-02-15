@@ -69,6 +69,23 @@ def confirm(request):
 	return render(request, 'confirm.html')
 
 
+def online(request):
+	''' Views for online registration'''
+
+	return render(request, 'online.html')
+
+
+def online_search(request):
+	if request.method=="POST":
+		search_text = request.POST['search_text']
+	else:
+		search_text=''
+
+	zealids = Participants_Online.objects.filter(zealid__contains=search_text)
+
+	return render(request, 'ajax_search.html', {'zealids': zealids })
+
+
 
 
 

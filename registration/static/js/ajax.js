@@ -1,10 +1,11 @@
 $(function(){
-	$('#search').keyup(function(){
+	$('#search').keypress(function(){
 		$.ajax({
 			type:"POST",
 			url:"/search/",
 			data:{
-				'search_text':$('#search').val(),
+				'search_text': $('#search').val(),
+				'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val(),
 
 			},
 			success:searchSuccess,
