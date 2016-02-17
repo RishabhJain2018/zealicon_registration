@@ -30,6 +30,10 @@
 			<label> College : </label>
 			{{data.college}}
 		</div>
+		<div class="form-group">
+			<label> Fees : </label>
+				{{fee}}
+		</div>
 		<div class="form-group"> 
 			<label> Year </label>
 			{{data.year}}
@@ -37,7 +41,18 @@
 	</div>
 	<form method="POST" action="{% url 'confirm' %}">
 		{% csrf_token %}
-		<input type="submit" value="Confirm" >
+		<input type="hidden" name="name" value="{{data.name}}">
+		<input type="hidden" name="email" value="{{data.email}}">
+		<input type="hidden" name="course" value="{{data.course}}">
+		<input type="hidden" name="branch" value="{{data.branch}}">
+		<input type="hidden" name="contact" value="{{data.contact}}">
+		<input type="hidden" name="college" value="{{data.college}}">
+		<input type="hidden" name="year" value="{{data.year}}">
+		<input type="hidden" name="fee" value="{{fee}}">
+		<input type="submit" name="confirm" value="Confirm">
 	</form>
+	<div>
+		<a href="/index/register/"> Back </a>
+	</div>
 </body>
 </html>

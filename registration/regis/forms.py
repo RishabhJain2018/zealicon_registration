@@ -4,5 +4,5 @@ from .models import Participants_Details
 class ParticipantsForm(forms.ModelForm):
 	class Meta:
 		model = Participants_Details
-		fields= '__all__'
+		fields= ['name','email','course','branch','contact','college','year']
 

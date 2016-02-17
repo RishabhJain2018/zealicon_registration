@@ -3,7 +3,7 @@ from regis.models import Participants_Details, Participants_Online
 # Register your models here.
 
 class ParticipantAdmin(admin.ModelAdmin):
-	list_display = ('name','email','course','branch','contact','college','year','zealidfinal',)
+	list_display = ('name','email','course','branch','contact','college','year','zealidfinal','fee')
 	list_filter = ('email','college','branch','year',)
 	search_fields = ('email',)
 

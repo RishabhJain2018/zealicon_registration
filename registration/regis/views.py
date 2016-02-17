@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 
 def is_member(user, group_name):
 	
-	''' Checks for the multiple users in the Group'''
+	''' Checks for the multiple users in the Group '''
 
 	return Group.objects.get(name=group_name).user_set.filter(groups__name__in=['Quanta_user','Nibble_user']).exists()
 		
@@ -54,8 +54,14 @@ def participants_register(request):
 		form=ParticipantsForm(request.POST)
 		if form.is_valid():
 			data=form.cleaned_data
-			form.save()
-			return render(request, 'confirm_registration.html', {'data':data})
+			if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
+				form.cleaned_data['fee']=150
+				fee=form.cleaned_data['fee']
+			else:
+				form.cleaned_data['fee']=200
+				fee=form.cleaned_data['fee']
+
+			return render(request, 'confirm_registration.html', {'data':data,'fee':fee})
 	
 	else:
 		return render(request, 'register.html', {'form':form})
@@ -66,7 +72,21 @@ def participants_register(request):
 def confirm(request):
 	''' Views for the conformation '''
 
-	return render(request, 'confirm.html')
+	if request.method=="POST":
+		form=ParticipantsForm(request.POST)
+		if form.is_valid():
+			if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
+				form.cleaned_data['fee']=150
+			else:
+				form.cleaned_data['fee']=200
+			
+			participant=form.save(commit=False)
+			participant.fee=form.cleaned_data['fee']
+			participant.save()
+
+			return render(request, 'confirm.html')
+
+	return render(request, 'confirm_registration.html')
 
 
 def online(request):
@@ -84,6 +104,14 @@ def online_search(request):
 	zealids = Participants_Online.objects.filter(zealid__contains=search_text)
 
 	return render(request, 'ajax_search.html', {'zealids': zealids })
+
+
+
+
+
+
+
+
 
 
 
