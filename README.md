@@ -24,7 +24,7 @@ Note: Ubuntu 14.04 LTS is recommended to be used.
 
 4. Now, run the following git clone(specify a directory)
    
-   https://github.com/ncs-jss/Registration_Module.git registration
+  https://github.com/RishabhJain2018/Registration.git registration
 
 5. Move to the directory in which you cloned the git repository.
 
