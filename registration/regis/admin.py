@@ -1,9 +1,9 @@
 from django.contrib import admin
-from regis.models import Participants_Details, Participants_Online
+from regis.models import ParticipantsDetail, ParticipantsOnline
 # Register your models here.
 
 class ParticipantAdmin(admin.ModelAdmin):
-	list_display = ('name','email','course','branch','contact','college','year','zealidfinal',)
+	list_display = ('name','email','course','branch','contact','college','year','zealidfinal','fee')
 	list_filter = ('email','college','branch','year',)
 	search_fields = ('email',)
 
@@ -12,5 +12,5 @@ class ParticipantOnline(admin.ModelAdmin):
 	list_display = ('zealid','name','email','course','branch','contact','college','year',)
 	
 
-admin.site.register(Participants_Details, ParticipantAdmin)
-admin.site.register(Participants_Online, ParticipantOnline)
+admin.site.register(ParticipantsDetail, ParticipantAdmin)
+admin.site.register(ParticipantsOnline, ParticipantOnline)
