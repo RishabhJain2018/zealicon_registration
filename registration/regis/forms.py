@@ -3,6 +3,6 @@ from .models import ParticipantsDetail
 
 class ParticipantsForm(forms.ModelForm):
 	class Meta:
-		model = ParticipantsDetail
+		model = Participants_Details
 		fields= ['name','email','course','branch','contact','college','year']
 

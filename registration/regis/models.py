@@ -4,7 +4,7 @@ import uuid
 
 # Create your models here.
 
-class ParticipantsDetail(models.Model):
+class Participants_Details(models.Model):
 	''' Registration models ''' 
 
 	CSE ='CSE'
