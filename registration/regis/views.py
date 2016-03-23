@@ -88,6 +88,8 @@ def confirm(request):
 			participant.fee=form.cleaned_data['fee']
 			participant.zealidfinal=form.cleaned_data['zealidfinal']
 			participant.save()
+			return render(request, 'confirm.html')
+			
 	return render(request, 'confirm_registration.html')
 
 
