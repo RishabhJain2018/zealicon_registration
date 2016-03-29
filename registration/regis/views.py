@@ -19,6 +19,7 @@ def is_member(user, group_name):
 		
 
 def administrator(request):
+	
 	''' Views For Administrator '''
 
 	if request.method=="POST":
@@ -54,39 +55,35 @@ def participants_register(request):
 		form=ParticipantsForm(request.POST)
 		if form.is_valid():
 			data=form.cleaned_data
+			print data
 			if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
 				form.cleaned_data['fee']=150
 				fee=form.cleaned_data['fee']
+				request.session['name']="hi"
 			else:
 				form.cleaned_data['fee']=200
 				fee=form.cleaned_data['fee']
 
 			return render(request, 'confirm_registration.html', {'data':data,'fee':fee})
-	
 	else:
 		return render(request, 'register.html', {'form':form})
 
 	return render(request, 'register.html', {'form':form})
 
-i=0
+
 def confirm(request):
 	''' Views for the conformation '''
-	global i
+
 	if request.method=="POST":
 		form=ParticipantsForm(request.POST)
 		if form.is_valid():
 			if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
 				form.cleaned_data['fee']=150
-				i+=1
-				form.cleaned_data['zealidfinal']= "ZealS000"+ str(i) 
 			else:
 				form.cleaned_data['fee']=200
-				i+=1
-				form.cleaned_data['zealidfinal']= "ZealS000"+ str(i)
 			
 			participant=form.save(commit=False)
 			participant.fee=form.cleaned_data['fee']
-			participant.zealidfinal=form.cleaned_data['zealidfinal']
 			participant.save()
 			return render(request, 'confirm.html')
 			

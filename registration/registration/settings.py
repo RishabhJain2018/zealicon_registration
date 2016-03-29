@@ -107,4 +107,11 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR ,"static"),
     )
 
-    
+CACHES = {
+    'default':{
+
+        'BACKEND':'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
