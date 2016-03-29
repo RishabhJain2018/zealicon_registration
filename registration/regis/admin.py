@@ -3,13 +3,13 @@ from regis.models import ParticipantsDetail, ParticipantsOnline
 # Register your models here.
 
 class ParticipantAdmin(admin.ModelAdmin):
-	list_display = ('name','email','course','branch','contact','college','year','zeal_id_final','fee','id_card','receipt',)
+	list_display = ('name','email','course','branch','contact','college','year','zeal_id','fee','id_card_print','receipt_print',)
 	list_filter = ('email','college','branch','year',)
 	search_fields = ('email',)
 
 
 class ParticipantOnline(admin.ModelAdmin):
-	list_display = ('zealid','name','email','course','branch','contact','college','year',)
+	list_display = ('zeal_id_temp','name','email','course','branch','contact','college','year',)
 	
 
 admin.site.register(ParticipantsDetail, ParticipantAdmin)

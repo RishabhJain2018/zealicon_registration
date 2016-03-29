@@ -31,12 +31,14 @@ def administrator(request):
 				if user is not None and user.is_active:
 					auth.login(request, user)
 					return HttpResponseRedirect('index/')
+				else:
+					return render(request, "base.html", {"error":1})
 
 			elif str(group) == 'Nibble_user' and is_member(user, group):
 				if user is not None and user.is_active:
 					auth.login(request, user)
 					return HttpResponseRedirect('admin/')
-	
+
 	return render(request, 'base.html')
 
 
@@ -59,7 +61,6 @@ def participants_register(request):
 			if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
 				form.cleaned_data['fee']=150
 				fee=form.cleaned_data['fee']
-				request.session['name']="hi"
 			else:
 				form.cleaned_data['fee']=200
 				fee=form.cleaned_data['fee']
@@ -102,7 +103,7 @@ def online_search(request):
 	else:
 		search_text=''
 
-	zealids = ParticipantsOnline.objects.filter(zealid__contains=search_text)
+	zealids = ParticipantsOnline.objects.filter(zeal_id_temp__contains=search_text)
 
 	return render(request, 'ajax_search.html', {'zealids': zealids })
 

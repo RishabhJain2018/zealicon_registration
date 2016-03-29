@@ -31,6 +31,9 @@
 		<input type="password" name="password" id="password">
 		<input type="submit" id="submitbtn" name="submitbtn" value="Login">
 	</form>
+	{% if error %}
+		<strong > Error ! </strong> Wrong username or password !
+	{% endif %}
 			{% endblock %}
 </div>
 </div>
