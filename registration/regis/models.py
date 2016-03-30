@@ -28,3 +28,6 @@ class ParticipantsOnline(models.Model):
 	college=models.CharField(max_length=200)
 	year=models.CharField(max_length=200)
 
+class SearchOnline(models.Model):
+	search=models.CharField(max_length=200,blank=False)
+

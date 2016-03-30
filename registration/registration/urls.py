@@ -10,10 +10,11 @@ urlpatterns = [
 	url(r'^index/$', 'regis.views.index', name='index'),
 	url(r'^index/register/$','regis.views.participants_register', name='register'),
 	url(r'^index/register/confirm/$', 'regis.views.confirm', name='confirm'),
-	url(r'^index/online/$', 'regis.views.online', name='online'),
-	url(r'^search/$', 'regis.views.online_search'),
 
-  
+	url(r'^index/online/$', 'regis.views.online_display', name='online'),
+	url(r'^index/online/register$', 'regis.views.online_register', name='online_register'),
+	url(r'^index/online/register/confirm$', 'regis.views.online_confirm', name='online_confirm'),
+
 
 ]
 
