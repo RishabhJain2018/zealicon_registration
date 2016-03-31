@@ -14,7 +14,4 @@ urlpatterns = [
 	url(r'^index/online/$', 'regis.views.online_display', name='online'),
 	url(r'^index/online/register$', 'regis.views.online_register', name='online_register'),
 	url(r'^index/online/register/confirm$', 'regis.views.online_confirm', name='online_confirm'),
-
-
 ]
-
