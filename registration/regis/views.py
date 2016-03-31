@@ -75,6 +75,7 @@ def confirm(request):
             participant_details=ParticipantsDetail.objects.get(pk=participant.id)
             participant_details.zeal_id="Zeal"+str(participant.id)
             participant_details.save()
+            request.session['print_id']="Zeal"+str(participant.id)
             return render(request, 'confirmed.html')
 
     return render(request, 'confirm.html')
@@ -120,6 +121,9 @@ def online_confirm(request):
             participant=form.save(commit=False)
             participant.fee=form.cleaned_data['fee']
             participant.save()
+            participant_details=ParticipantsDetail.objects.get(pk=participant.id)
+            participant_details.zeal_id="Zeal"+str(participant.id)
+            participant_details.save()
             return render(request, 'confirmed.html')
 
     return render(request, 'confirm.html')
