@@ -45,7 +45,6 @@ def participants_register(request):
 
     if request.method=="POST":
         form=ParticipantsForm(request.POST)
-        print form
         if form.is_valid():
             data=form.cleaned_data
             if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
