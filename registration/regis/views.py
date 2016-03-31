@@ -25,9 +25,9 @@ def administrator(request):
         elif user.is_staff:
             auth.login(request, user)
             return HttpResponseRedirect('index/')
-    else:
-        if request.user.is_authenticated():
-            return HttpResponseRedirect('index/')
+    # else:
+    #     if request.user.is_authenticated():
+    #         return HttpResponseRedirect('index/')
 
     return render(request, 'login.html')
 
@@ -72,6 +72,9 @@ def confirm(request):
             participant=form.save(commit=False)
             participant.fee=form.cleaned_data['fee']
             participant.save()
+            participant_details=ParticipantsDetail.objects.get(pk=participant.id)
+            participant_details.zeal_id="Zeal"+str(participant.id)
+            participant_details.save()
             return render(request, 'confirmed.html')
 
     return render(request, 'confirm.html')
@@ -86,6 +89,7 @@ def online_display(request):
         return render(request,'register_online.html',{"zeal_id_temp": zeal_id_temp})
 
     return render(request, 'search_online.html')
+
 
 def online_register(request):
     if request.method=="POST":
