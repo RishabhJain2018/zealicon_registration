@@ -73,9 +73,12 @@ def confirm(request):
             participant.fee=form.cleaned_data['fee']
             participant.save()
             participant_details=ParticipantsDetail.objects.get(pk=participant.id)
-            participant_details.zeal_id="Zeal"+str(participant.id)
+            participant_details.zeal_id = "Zeal"+str(participant.id)
             participant_details.save()
-            request.session['print_id']="Zeal"+str(participant.id)
+            request.session['print_id'] = []
+            request.session['print_id'].append("Zeal"+str(participant.id))
+            for p in request.session['print_id']:
+                print p
             return render(request, 'confirmed.html')
 
     return render(request, 'confirm.html')

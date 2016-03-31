@@ -5,7 +5,7 @@ window.onload = function() {
     var name= localStorage.getItem('name')
     var email= localStorage.getItem('email')
     var course= localStorage.getItem('course')
-    var branch= localStorage.getItem('branch1')
+    var branch= localStorage.getItem('branch')
     var contact= localStorage.getItem('contact')
     var college= localStorage.getItem('college')
     var year= localStorage.getItem('year')
@@ -13,7 +13,7 @@ window.onload = function() {
     document.getElementById('name').value=name;
     document.getElementById('email').value=email
     document.getElementById('course').value=course
-    document.getElementById('branch1').value=branch
+    document.getElementById('branch').value=branch
     document.getElementById('contact').value=contact
     document.getElementById('college').value=college
     document.getElementById('year').value=year
@@ -22,7 +22,7 @@ window.onload = function() {
       var name = document.getElementById('name').value;
       var email = document.getElementById('email').value;
       var course = document.getElementById('course').value;
-      var branch = document.getElementById('branch1').value;
+      var branch = document.getElementById('branch').value;
       var contact = document.getElementById('contact').value;
       var college = document.getElementById('college').value;
       var year = document.getElementById('year').value;
@@ -30,7 +30,7 @@ window.onload = function() {
       localStorage.setItem('name',name);
       localStorage.setItem('email',email);
       localStorage.setItem('course',course);
-      localStorage.setItem('branch1',branch);
+      localStorage.setItem('branch',branch);
       localStorage.setItem('contact',contact);
       localStorage.setItem('college',college);
       localStorage.setItem('year',year);
