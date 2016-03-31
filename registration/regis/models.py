@@ -18,14 +18,14 @@ class ParticipantsDetail(models.Model):
 
 
 class ParticipantsOnline(models.Model):
-    zeal_id_temp=models.CharField(max_length=200)
-    name=models.CharField(max_length=200)
-    email=models.EmailField(max_length=200)
-    course=models.CharField(max_length=200)
-    branch=models.CharField(max_length=200)
-    contact=models.CharField(max_length=10)
-    college=models.CharField(max_length=200)
-    year=models.CharField(max_length=200)
+    zeal_id_temp=models.CharField(max_length=200, null=False)
+    name=models.CharField(max_length=200, null=False)
+    email=models.EmailField(max_length=200, null=False)
+    course=models.CharField(max_length=200, null=False)
+    branch=models.CharField(max_length=200, null=True)
+    contact=models.CharField(max_length=10, null=False)
+    college=models.CharField(max_length=200, null=False)
+    year=models.CharField(max_length=200, null=False)
 
 
 class SearchOnline(models.Model):
