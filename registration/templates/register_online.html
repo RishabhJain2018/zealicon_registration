@@ -114,7 +114,7 @@
                             <a href="/index/register/"><i class="fa fa-pencil fa-fw"></i> Register Offline</a>
                         </li>
                         <li>
-                            <a href="/index/online/"><i class="fa fa-user fa-fw"></i> Register Online</a>
+                            <a href="/index/search/"><i class="fa fa-user fa-fw"></i> Register Online</a>
                         </li>
                          <li>
                             <a href="#"><i class="fa fa-print fa-fw"></i> Print Id Card</a>
@@ -138,58 +138,61 @@
                 <div class="col-lg-6 col-lg-offset-3">
                     <br>
                     <br>
+                {% if error %}
+                    <h2>{{error}}<a href="/index/register">Click here</a> to register as a new participant.</h2>
+                {% else %}
                 <form role="form" method="POST" action="{% url 'online_register' %}" id="registerform">
                     {% csrf_token %}
                     <div class="form-group">
                         <label class="control-label" for ="name"> Name : </label>
-                        <input id="name" name="name" type="text" value="{{zeal_id_temp.0.2}}" class="form-control input md" required>
+                        <input id="name" name="name" type="text" value="{{zeal_id.0.2}}" class="form-control input md" required>
                     </div><br>
                     <div class="form-group">
                         <label class="control-label" for="email"> Email : </label>
-                        <input id="email" name="email" type="email" value="{{zeal_id_temp.0.3}}" class="form-control input md" required>
+                        <input id="email" name="email" type="email" value="{{zeal_id.0.3}}" class="form-control input md" required>
                     </div><br>
                     <div class="form-group">
                         <label class="control-label" for="course"> Course : </label>
                         <select id="course" name="course" class="form-control">
-                            <option value="Btech" {% if zeal_id_temp.0.4 == "Btech" %} selected="selected" {% endif %}>Btech </option>
-                            <option value="MBA" {% if zeal_id_temp.0.4 == "MBA"%} selected="selected" {% endif %} > MBA </option>
-                            <option value="MCA" {% if zeal_id_temp.0.4 == "MCA"%} selected="selected" {% endif %}>MCA </option>
-                            <option value="MAM" {% if zeal_id_temp.0.4 == "MAM"%} selected="selected" {% endif %}>MAM</option>
-                            <option value="Mtech" {% if zeal_id_temp.0.4 == "Mtech"%} selected="selected" {% endif %}>Mtech</option>
+                            <option value="Btech" {% if zeal_id.0.4 == "Btech" %} selected="selected" {% endif %}>Btech </option>
+                            <option value="MBA" {% if zeal_id.0.4 == "MBA"%} selected="selected" {% endif %} > MBA </option>
+                            <option value="MCA" {% if zeal_id.0.4 == "MCA"%} selected="selected" {% endif %}>MCA </option>
+                            <option value="MAM" {% if zeal_id.0.4 == "MAM"%} selected="selected" {% endif %}>MAM</option>
+                            <option value="Mtech" {% if zeal_id.0.4 == "Mtech"%} selected="selected" {% endif %}>Mtech</option>
                         </select>
                     </div><br>
-                    {% if zeal_id_temp.0.5 %}
+                    {% if zeal_id.0.5 %}
                     <div id="branch" class="form-group">
                         <label class="control-label" for="branch" > Branch : </label>
                         <select name="branch" class="form-control">
-                            <option value="" {% if zeal_id_temp.0.5 == " " %} selected="selected" {% endif %} ></option>
-                            <option value="CSE" {% if zeal_id_temp.0.5 == "CSE" %} selected="selected" {% endif %} >CSE </option>
-                            <option value="IT" {% if zeal_id_temp.0.5 == "IT" %} selected="selected" {% endif %} >IT</option>
-                            <option value="EE" {% if zeal_id_temp.0.5 == "EE" %} selected="selected" {% endif %} >EE </option>
-                            <option value="ECE" {% if zeal_id_temp.0.5 == "ECE" %} selected="selected" {% endif %} >ECE </option>
-                            <option value="CE" {% if zeal_id_temp.0.5 == "CE" %} selected="selected" {% endif %} >CE</option>
-                            <option value="IC" {% if zeal_id_temp.0.5 == "IC" %} selected="selected" {% endif %} >IC </option>
-                            <option value="ME" {% if zeal_id_temp.0.5 == "ME" %} selected="selected" {% endif %} >ME </option>
-                            <option value="MT" {% if zeal_id_temp.0.5 == "MT" %} selected="selected" {% endif %} >MT </option>
+                            <option value="" {% if zeal_id.0.5 == " " %} selected="selected" {% endif %} ></option>
+                            <option value="CSE" {% if zeal_id.0.5 == "CSE" %} selected="selected" {% endif %} >CSE </option>
+                            <option value="IT" {% if zeal_id.0.5 == "IT" %} selected="selected" {% endif %} >IT</option>
+                            <option value="EE" {% if zeal_id.0.5 == "EE" %} selected="selected" {% endif %} >EE </option>
+                            <option value="ECE" {% if zeal_id.0.5 == "ECE" %} selected="selected" {% endif %} >ECE </option>
+                            <option value="CE" {% if zeal_id.0.5 == "CE" %} selected="selected" {% endif %} >CE</option>
+                            <option value="IC" {% if zeal_id.0.5 == "IC" %} selected="selected" {% endif %} >IC </option>
+                            <option value="ME" {% if zeal_id.0.5 == "ME" %} selected="selected" {% endif %} >ME </option>
+                            <option value="MT" {% if zeal_id.0.5 == "MT" %} selected="selected" {% endif %} >MT </option>
                         </select>
                     </div><br>
                     {% endif %}
 
                     <div class="form-group">
                         <label class="control-label" for ="contact"> Contact : </label>
-                        <input id="contact" name="contact" type="text"  pattern ="\d{10}" value="{{zeal_id_temp.0.6}}" maxlength=10 class="form-control input md" required>
+                        <input id="contact" name="contact" type="text"  pattern ="\d{10}" value="{{zeal_id.0.6}}" maxlength=10 class="form-control input md" required>
                     </div><br>
                     <div class="form-group">
                         <label class="control-label" for="college"> College :</label>
-                        <input type="text" id="college" name="college" value="{{zeal_id_temp.0.7}}"  class="form-control input md" required>
+                        <input type="text" id="college" name="college" value="{{zeal_id.0.7}}"  class="form-control input md" required>
                     </div><br>
                     <div class="form-group">
                         <label class="control-label" for="year"> Year : </label>
                         <select  class="form-control" id="year" name="year" >
-                            <option value="FIRST" {% if zeal_id_temp.0.8 == "FIRST" %} selected="selected" {% endif %} >FIRST</optio>
-                            <option value="SECOND" {% if zeal_id_temp.0.8 == "SECOND" %} selected="selected" {% endif %} >SECOND</option>
-                            <option value="THIRD" {% if zeal_id_temp.0.8 == "THIRD" %} selected="selected" {% endif %} >THIRD</option>
-                            <option value="FOURTH" {% if zeal_id_temp.0.8 == "FOURTH" %} selected="selected" {% endif %} >FOURTH</option>
+                            <option value="FIRST" {% if zeal_id.0.8 == "FIRST" %} selected="selected" {% endif %} >FIRST</optio>
+                            <option value="SECOND" {% if zeal_id.0.8 == "SECOND" %} selected="selected" {% endif %} >SECOND</option>
+                            <option value="THIRD" {% if zeal_id.0.8 == "THIRD" %} selected="selected" {% endif %} >THIRD</option>
+                            <option value="FOURTH" {% if zeal_id.0.8 == "FOURTH" %} selected="selected" {% endif %} >FOURTH</option>
                                 </select>
                     </div><br>
                     <div class="form-group">
@@ -197,6 +200,7 @@
                         <button type="submit" id="submitbtn" name="submitbtn" class="col-lg-offset-1 btn btn-primary btn-lg" value="Register">Register</button>
                     </div>
                 </form>
+                {% endif %}
             </div>
                 
             </div>

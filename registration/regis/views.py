@@ -25,11 +25,12 @@ def administrator(request):
         elif user.is_staff:
             auth.login(request, user)
             return HttpResponseRedirect('index/')
-    # else:
-    #     if request.user.is_authenticated():
-    #         return HttpResponseRedirect('index/')
-
-    return render(request, 'login.html')
+    else:
+        if not request.user.is_authenticated():
+            return render(request, 'login.html',)
+        else:
+            if request.user.is_staff or request.user.is_superuser:
+                return HttpResponseRedirect('/index/')
 
 
 def index(request):
@@ -44,6 +45,7 @@ def participants_register(request):
 
     if request.method=="POST":
         form=ParticipantsForm(request.POST)
+        print form
         if form.is_valid():
             data=form.cleaned_data
             if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
@@ -54,6 +56,8 @@ def participants_register(request):
                 fee=form.cleaned_data['fee']
 
             return render(request, 'confirm.html', {'data':data,'fee':fee})
+        else:
+            return render(request, 'register.html', {'form':form})
     else:
         return render(request, 'register.html', {'form':form})
 
@@ -75,24 +79,28 @@ def confirm(request):
             participant_details=ParticipantsDetail.objects.get(pk=participant.id)
             participant_details.zeal_id = "Zeal"+str(participant.id)
             participant_details.save()
-            request.session['print_id'] = []
-            request.session['print_id'].append("Zeal"+str(participant.id))
-            for p in request.session['print_id']:
-                print p
+            print_list = request.session['print_id']
+            print_list.append("Z16_"+str(participant.id))
+            request.session['print_id'] = print_list
             return render(request, 'confirmed.html')
 
     return render(request, 'confirm.html')
 
 
-def online_display(request):
+def search(request):
     ''' Views for online registration'''
 
     if request.method=="POST":
         search=request.POST.get('search')
-        zeal_id_temp=ParticipantsOnline.objects.filter(zeal_id_temp__contains=search).values_list()
-        return render(request,'register_online.html',{"zeal_id_temp": zeal_id_temp})
-
-    return render(request, 'search_online.html')
+        try:
+            zeal_id_obj = ParticipantsOnline.objects.get(zeal_id_temp=search)
+            if ParticipantsDetail.objects.filter(email=zeal_id_obj.email):
+                return render(request,'register_online.html',{"error": "Email id or Mobile number already registered."})
+        except:
+            return render(request, 'register_online.html', {'error': "Sorry, you have not registered online."})
+        zeal_id = ParticipantsOnline.objects.filter(zeal_id_temp=search).values_list()
+        return render(request,'register_online.html',{"zeal_id": zeal_id})
+    return render(request, 'search_online.html', {})
 
 
 def online_register(request):

@@ -4,7 +4,11 @@
 <html lang="en">
 
 <head>
-
+<style type="text/css">
+    .errorlist{
+        color: red;
+    }
+</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -140,6 +144,7 @@
                     <br>
                 <form role="form" method="POST" action="" id="registerform">
                     {% csrf_token %}
+                    <p style="color:#ff0000;">{{form.errors}}</p>
                     <div class="form-group">
                         <label class="control-label" for ="name"> Name : </label>
                         <input id="name" name="name" type="text" placeholder="Enter your name" class="form-control input md" required>
@@ -204,8 +209,6 @@
 
     </div>
     <!-- /#wrapper -->
-
- 
 
 </body>
 
