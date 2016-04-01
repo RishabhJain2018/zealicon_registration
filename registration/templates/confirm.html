@@ -119,10 +119,12 @@
                         <label class="control-label" for="email"> Email : </label>
                         <input id="email" name="email" type="email" Value="{{data.email}}" class="form-control input md" disabled>
                     </div><br>
+
                     <div class="form-group">
                         <label class="control-label" for="course"> Course : </label>
                         <input id="course" name="course" type="text" Value="{{data.course}}" class="form-control input md" disabled>
                     </div><br>
+                    
                     {% if data.branch %}
                     <div id="branch" class="form-group">
                         <label class="control-label" for="branch" > Branch : </label>
@@ -152,7 +154,7 @@
                                 <input type="hidden" name="name" value="{{data.name}}">
                                 <input type="hidden" name="email" value="{{data.email}}">
                                 <input type="hidden" name="course" value="{{data.course}}">
-                                {%if data.branch %}
+                                {% if data.branch %}
                                 <input type="hidden" name="branch" value="{{data.branch}}">
                                 {% endif %}
                                 <input type="hidden" name="contact" value="{{data.contact}}">

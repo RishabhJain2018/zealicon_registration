@@ -19,19 +19,18 @@ def administrator(request):
         username=request.POST.get('username')
         password=request.POST.get('password')
         user=auth.authenticate(username=username, password=password)
+        if user==None:
+            return render(request, 'login.html',{'error':1})
         if user.is_superuser:
             auth.login(request, user)
             return HttpResponseRedirect('admin/')
         elif user.is_staff:
             auth.login(request, user)
             return HttpResponseRedirect('index/')
-    else:
-        if not request.user.is_authenticated():
-            return render(request, 'login.html',)
-        else:
-            if request.user.is_staff or request.user.is_superuser:
-                return HttpResponseRedirect('/index/')
 
+    elif request.method=="GET":
+        return render(request, 'login.html')
+        
 
 def index(request):
     ''' Views for Index Page '''
@@ -78,9 +77,15 @@ def confirm(request):
             participant_details=ParticipantsDetail.objects.get(pk=participant.id)
             participant_details.zeal_id = "Zeal"+str(participant.id)
             participant_details.save()
-            print_list = request.session['print_id']
-            print_list.append("Z16_"+str(participant.id))
-            request.session['print_id'] = print_list
+
+            if "print_id" in request.session:
+                print_list=print_list.append("Zeal"+str(participant.id))
+                request.session['print_id']=print_list
+                print print_list
+            else:
+                print_list=[]
+                request.session['print_id']="Zeal"+str(participant.id)
+
             return render(request, 'confirmed.html')
 
     return render(request, 'confirm.html')
@@ -137,3 +142,8 @@ def online_confirm(request):
             return render(request, 'confirmed.html')
 
     return render(request, 'confirm.html')
+
+def print_id(request):
+    printid=request.session['print_id']
+    participant_obj = ParticipantsDetail.objects.filter(zeal_id=printid).values_list()
+    return render(request, 'icard.html', {'participant_obj':participant_obj})

@@ -1,12 +1,12 @@
 function toggleBranch(){
-	if ($("#course").val()=="Btech" || $("#course").val()=="Mtech")
+	if ($("#course").val()=="btech" || $("#course").val()=="mtech")
 		$("#branch").show();
 	else
 		$("#branch").hide();
 }
 
 $(document).ready(function(){
-	$("#course").change(function(){
+	$("#course").click(function(){
 		toggleBranch();	
 	});
 

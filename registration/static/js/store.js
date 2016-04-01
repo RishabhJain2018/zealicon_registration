@@ -1,11 +1,14 @@
 window.onload = function() {
 
   if(localStorage){
-    console.log(localStorage)
+
     var name= localStorage.getItem('name')
     var email= localStorage.getItem('email')
     var course= localStorage.getItem('course')
-    var branch= localStorage.getItem('branch')
+    if(course=='btech' || course=='mtech')
+    {
+    var branch= localStorage.getItem('branch') 
+    }
     var contact= localStorage.getItem('contact')
     var college= localStorage.getItem('college')
     var year= localStorage.getItem('year')
@@ -13,29 +16,39 @@ window.onload = function() {
     document.getElementById('name').value=name;
     document.getElementById('email').value=email
     document.getElementById('course').value=course
+    if(document.getElementById('course').value == 'btech' ||  document.getElementById('course').value=='mtech')
+  {
     document.getElementById('branch').value=branch
+  }
     document.getElementById('contact').value=contact
     document.getElementById('college').value=college
     document.getElementById('year').value=year
 
-    document.getElementById('registerform').addEventListener('submit',function(){
-      var name = document.getElementById('name').value;
-      var email = document.getElementById('email').value;
-      var course = document.getElementById('course').value;
-      var branch = document.getElementById('branch').value;
-      var contact = document.getElementById('contact').value;
-      var college = document.getElementById('college').value;
-      var year = document.getElementById('year').value;
+  document.getElementById('registerform').addEventListener('submit',function(){
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var course = document.getElementById('course').value;
+      if(document.getElementById('course').value == 'btech' ||  document.getElementById('course').value=='mtech')
+  {
+    document.getElementById('branch').value=branch
+  }
+    var branch = document.getElementById('branch').value;
+    var contact = document.getElementById('contact').value;
+    var college = document.getElementById('college').value;
+    var year = document.getElementById('year').value;
 
-      localStorage.setItem('name',name);
-      localStorage.setItem('email',email);
-      localStorage.setItem('course',course);
-      localStorage.setItem('branch',branch);
-      localStorage.setItem('contact',contact);
-      localStorage.setItem('college',college);
-      localStorage.setItem('year',year);
+    localStorage.setItem('name',name);
+    localStorage.setItem('email',email);
+    localStorage.setItem('course',course);
+      if(document.getElementById('course').value == 'btech' ||  document.getElementById('course').value=='mtech')
+  {
+    document.getElementById('branch').value=branch
+    localStorage.setItem('branch',branch);
+  }
+    localStorage.setItem('contact',contact);
+    localStorage.setItem('college',college);
+    localStorage.setItem('year',year);
 
-
-    });
+});
   }
 }

@@ -144,7 +144,7 @@
                     <br>
                 <form role="form" method="POST" action="" id="registerform">
                     {% csrf_token %}
-                    <p style="color:#ff0000;">{{form.errors}}</p>
+                    <p style="color:#ff0000;">{{form.errors}} </p>
                     <div class="form-group">
                         <label class="control-label" for ="name"> Name : </label>
                         <input id="name" name="name" type="text" placeholder="Enter your name" class="form-control input md" required>
@@ -156,11 +156,11 @@
                     <div class="form-group">
                         <label class="control-label" for="course"> Course : </label>
                         <select id="course" name="course" class="form-control">
-                            <option value="Btech"> Btech </option>
-                            <option value="MBA"> MBA </option>
-                            <option value="MCA">MCA </option>
-                            <option value="MAM">MAM</option>
-                            <option value="Mtech">Mtech</option>
+                            <option value="btech"> Btech </option>
+                            <option value="mba"> MBA </option>
+                            <option value="mca">MCA </option>
+                            <option value="mam">MAM</option>
+                            <option value="mtech">Mtech</option>
                         </select>
                     </div><br>
 
@@ -168,14 +168,14 @@
                         <label class="control-label" for="branch" > Branch : </label>
                         <select name="branch" class="form-control">
                             <option value=""></option>
-                            <option value="CSE">CSE </option>
-                            <option value="IT">IT</option>
-                            <option value="EE">EE </option>
-                            <option value="ECE">ECE </option>
-                            <option value="CE">CE</option>
-                            <option value="IC">IC </option>
-                            <option value="ME">ME </option>
-                            <option value="MT">MT </option>
+                            <option value="cse">CSE </option>
+                            <option value="it">IT</option>
+                            <option value="ee">EE </option>
+                            <option value="ece">ECE </option>
+                            <option value="ce">CE</option>
+                            <option value="ic">IC </option>
+                            <option value="me">ME </option>
+                            <option value="mt">MT </option>
                         </select>
                     </div><br>
 
@@ -190,10 +190,10 @@
                     <div class="form-group">
                         <label class="control-label" for="year"> Year : </label>
                         <select  class="form-control" id="year" name="year" >
-                            <option value="FIRST">FIRST</option>
-                            <option value="SECOND">SECOND</option>
-                            <option value="THIRD">THIRD</option>
-                            <option value="FOURTH">FOURTH</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
                         </select>
                     </div><br>
                     <div class="form-group">

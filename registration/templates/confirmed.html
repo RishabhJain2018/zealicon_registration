@@ -106,9 +106,22 @@
             <div class="row">
                 <br><br><br>
             <h2>Thanks for registering.</h2>
-            <button id="print" href="/print"> Print ID CARD</button>
-            <button id="print" href="/index"> Go for new Participant</button>
+            <br><br>
+       <div class="form-group">
+        {% csrf_token %}
+        <form action="/print/" method="POST">
+            {% csrf_token %}
+            <button type="submit" id="submitbtn" name="submitbtn" class="col-lg-offset-3 btn btn-primary btn-lg">Print</button>
+        </form>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div class="form-group">
+        <form action="/index/" method="POST">
+            {% csrf_token %}
+             <button type="submit" id="submitbtn" name="submitbtn" class="col-lg-offset-1 btn btn-primary btn-lg">Go For New participant</button>
+        </form>
             </div>
+        </div>
             
         <!-- /#page-wrapper -->
 
