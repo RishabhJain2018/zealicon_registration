@@ -61,7 +61,6 @@ def participants_register(request):
     else:
         return render(request, 'register.html', {'form':form})
 
-
 def confirm(request):
 
     ''' Views to confirm the registration '''
@@ -81,13 +80,13 @@ def confirm(request):
             participant_details.zeal_id = "Zeal"+str(participant.id)
             participant_details.save()
 
-            if "print_id" in request.session:
-                print_list=print_list.append("Zeal"+str(participant.id))
-                request.session['print_id']=print_list
-                print print_list
+            if not 'print_id' in request.session or not request.session['print_id']:
+                request.session['print_id']=["Zeal"+str(participant.id)]
+                print request.session['print_id']
             else:
-                print_list=[]
-                request.session['print_id']="Zeal"+str(participant.id)
+                print_list=request.session['print_id']
+                print_list.append("Zeal"+str(participant.id))
+                request.session['print_id']=print_list
 
             return render(request, 'confirmed.html')
 
