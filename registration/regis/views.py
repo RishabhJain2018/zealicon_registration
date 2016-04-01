@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 
 def administrator(request):
     
-    ''' Views For Administrator '''
+    ''' Views For Login Into the Portal '''
 
     if request.method=="POST":
         username=request.POST.get('username')
@@ -30,14 +30,16 @@ def administrator(request):
 
     elif request.method=="GET":
         return render(request, 'login.html')
-        
+
 
 def index(request):
-    ''' Views for Index Page '''
+    ''' Views for Dashboard '''
+
     return render(request, 'index.html')
 
 
 def participants_register(request):
+
     ''' Views to register a Student '''
 
     form=ParticipantsForm()
@@ -61,7 +63,8 @@ def participants_register(request):
 
 
 def confirm(request):
-    ''' Views for the conformation '''
+
+    ''' Views to confirm the registration '''
 
     if request.method=="POST":
         form=ParticipantsForm(request.POST)

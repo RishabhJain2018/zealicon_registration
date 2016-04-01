@@ -37,6 +37,12 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+     <script src="{% static "js/showhide.js" %}"></script>
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
 
 </head>
 
@@ -125,12 +131,10 @@
                         <input id="course" name="course" type="text" Value="{{data.course}}" class="form-control input md" disabled>
                     </div><br>
                     
-                    {% if data.branch %}
-                    <div id="branch" class="form-group">
+                    <div id="branch_hide" class="form-group">
                         <label class="control-label" for="branch" > Branch : </label>
                         <input id="branch" name="branch" type="text" Value="{{data.branch}}" class="form-control input md" disabled>
                     </div><br>
-                    {% endif %}
 
                     <div class="form-group">
                         <label class="control-label" for ="contact"> Contact : </label>

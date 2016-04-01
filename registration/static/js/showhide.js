@@ -1,12 +1,24 @@
+window.onload=function(){
+  if ($("#course").val()=="btech" || $("#course").val()=="mtech")
+    {
+      $("#branch_hide").show();
+    }
+  else if ($("#course").val()=="mba" || $("#course").val()=="mca" || $("#course").val()=="mam")
+   { $("#branch_hide").hide();
+    $("#branch").append('');
+  }
+}
+
 function toggleBranch(){
 	if ($("#course").val()=="btech" || $("#course").val()=="mtech")
-		$("#branch").show();
+		$("#branch_hide").show();
 	else
-		$("#branch").hide();
+		$("#branch_hide").hide();
+    $("#branch").append('');
 }
 
 $(document).ready(function(){
-	$("#course").click(function(){
+	$("#course").change(function(){
 		toggleBranch();	
 	});
 

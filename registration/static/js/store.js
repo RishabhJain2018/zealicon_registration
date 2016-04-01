@@ -14,12 +14,15 @@ window.onload = function() {
     var year= localStorage.getItem('year')
 
     document.getElementById('name').value=name;
-    document.getElementById('email').value=email
-    document.getElementById('course').value=course
+    document.getElementById('email').value=email;
+    document.getElementById('course').value=course;
     if(document.getElementById('course').value == 'btech' ||  document.getElementById('course').value=='mtech')
   {
     document.getElementById('branch').value=branch
   }
+  else 
+   { document.getElementById('branch').value=null;}
+
     document.getElementById('contact').value=contact
     document.getElementById('college').value=college
     document.getElementById('year').value=year
@@ -28,11 +31,12 @@ window.onload = function() {
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
     var course = document.getElementById('course').value;
-      if(document.getElementById('course').value == 'btech' ||  document.getElementById('course').value=='mtech')
+      if( course== 'btech' ||  course =='mtech')
   {
-    document.getElementById('branch').value=branch
+    var branch=document.getElementById('branch').value;
   }
-    var branch = document.getElementById('branch').value;
+      else
+        {var branch = null;}
     var contact = document.getElementById('contact').value;
     var college = document.getElementById('college').value;
     var year = document.getElementById('year').value;
@@ -40,15 +44,19 @@ window.onload = function() {
     localStorage.setItem('name',name);
     localStorage.setItem('email',email);
     localStorage.setItem('course',course);
-      if(document.getElementById('course').value == 'btech' ||  document.getElementById('course').value=='mtech')
+      if(course == 'btech' ||  course == 'mtech')
   {
-    document.getElementById('branch').value=branch
     localStorage.setItem('branch',branch);
+  }
+  else
+  {
+    localStorage.setItem('branch', null);
   }
     localStorage.setItem('contact',contact);
     localStorage.setItem('college',college);
     localStorage.setItem('year',year);
 
 });
-  }
+
+}
 }

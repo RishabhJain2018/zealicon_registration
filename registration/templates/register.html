@@ -164,10 +164,9 @@
                         </select>
                     </div><br>
 
-                    <div id="branch" class="form-group">
+                    <div id="branch_hide" class="form-group">
                         <label class="control-label" for="branch" > Branch : </label>
-                        <select name="branch" class="form-control">
-                            <option value=""></option>
+                        <select id="branch" name="branch" class="form-control">
                             <option value="cse">CSE </option>
                             <option value="it">IT</option>
                             <option value="ee">EE </option>
@@ -197,7 +196,7 @@
                         </select>
                     </div><br>
                     <div class="form-group">
-                        <button type="submit" id="submitbtn" name="submitbtn" class="col-lg-offset-3 btn btn-primary btn-lg" value="Back" onClick="history.go(-1)">Back</button>
+                        <button type="reset" id="submitbtn" name="submitbtn" class="col-lg-offset-3 btn btn-primary btn-lg" onClick="localStorage.clear()">Reset</button>
                         <button type="submit" id="submitbtn" name="submitbtn" class="col-lg-offset-1 btn btn-primary btn-lg" value="Register">Register</button>
                     </div>
                 </form>
