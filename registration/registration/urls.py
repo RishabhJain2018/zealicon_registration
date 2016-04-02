@@ -14,5 +14,7 @@ urlpatterns = [
 	url(r'^index/search/$', 'regis.views.search', name='search'),
 	url(r'^index/online/register$', 'regis.views.online_register', name='online_register'),
 	url(r'^index/online/register/confirm$', 'regis.views.online_confirm', name='online_confirm'),
-	url(r'^print/$','regis.views.print_id', name='print')
+	url(r'^print/$','regis.views.print_id', name='print'),
+
+	url(r'^print/receipt$', 'regis.views.print_receipt', name='print_receipts'),
 ]

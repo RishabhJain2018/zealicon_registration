@@ -41,7 +41,11 @@
     <p>
     <a href="/index"> Home </a>
     <input type="button" value="Print" onClick="window.print()">
+    <input type="button" value="Back" onClick="history.go(-1)">
   </p>
+  {% if error %}
+  <p><strong> Sorry ! </strong> No ID cards to print</p>
+  {% else %} 
 <div class="container">
   <div class="i-card">
     <div class="logo">
@@ -207,6 +211,7 @@
     </div>
   </div>            
 </div>
+{% endif %}
 </body>
 </html>
 

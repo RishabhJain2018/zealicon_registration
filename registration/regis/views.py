@@ -28,7 +28,7 @@ def administrator(request):
         elif user.is_staff:
             auth.login(request, user)
             return HttpResponseRedirect('index/')
-
+            del request.session['print_id']
     elif request.method=="GET":
         return render(request, 'login.html')
 
@@ -149,7 +149,6 @@ def online_confirm(request):
 
             if not 'print_id' in request.session or not request.session['print_id']:
                 request.session['print_id']=["Zeal"+str(participant.id)]
-                print request.session['print_id']
             else:
                 print_list=request.session['print_id']
                 print_list.append("Zeal"+str(participant.id))
@@ -160,15 +159,19 @@ def online_confirm(request):
     return render(request, 'confirm_online.html')
 
 def print_id(request):
-    
+
     d=defaultdict(list)
     i=0
+    try:
+        for p in request.session['print_id']:
+            participant_obj = ParticipantsDetail.objects.filter(zeal_id=p).values_list()
+            d[i].append(participant_obj)
+            i += 1
 
-    for p in request.session['print_id']:
-    # printid=request.session['print_id']
-        participant_obj = ParticipantsDetail.objects.filter(zeal_id=p).values_list()
-        d[i].append(participant_obj)
-        i += 1
+            # del request.session['print_id']
+    except:
+        return render(request, "icard.html", {'error':1})
+
 
     print d
 
@@ -179,6 +182,10 @@ def print_id(request):
     # print d[0][0][0][8]
     # print d[0][0][0][2]
     # print d[0][0][0][6]
-
-
+    
     return render(request, 'icard.html', {'d':d})
+
+
+def print_receipt(request):
+    return render(request, 'receipts.html',{'error':1})
+
