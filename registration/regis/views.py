@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, Http404
 from django.template import Context, Template
 from django.shortcuts import get_object_or_404
+from collections import defaultdict
 
 
 def administrator(request):
@@ -106,7 +107,8 @@ def search(request):
             return render(request, 'register_online.html', {'error': "Sorry, you have not registered online."})
         zeal_id = ParticipantsOnline.objects.filter(zeal_id_temp=search).values_list()
         return render(request,'register_online.html',{"zeal_id": zeal_id})
-    return render(request, 'search_online.html', {})
+
+    return render(request, 'search_online.html')
 
 
 def online_register(request):
@@ -114,14 +116,16 @@ def online_register(request):
         form=ParticipantsForm(request.POST)
         if form.is_valid():
             data=form.cleaned_data
+
             if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
                 form.cleaned_data['fee']=150
                 fee=form.cleaned_data['fee']
             else:
                 form.cleaned_data['fee']=200
                 fee=form.cleaned_data['fee']
+
             return render(request, 'confirm.html',{'data': data,'fee':fee})
-    else:
+    elif request.method=="GET":
         return render(request, 'search_online.html')
 
 
@@ -141,11 +145,40 @@ def online_confirm(request):
             participant_details=ParticipantsDetail.objects.get(pk=participant.id)
             participant_details.zeal_id="Zeal"+str(participant.id)
             participant_details.save()
+
+
+            if not 'print_id' in request.session or not request.session['print_id']:
+                request.session['print_id']=["Zeal"+str(participant.id)]
+                print request.session['print_id']
+            else:
+                print_list=request.session['print_id']
+                print_list.append("Zeal"+str(participant.id))
+                request.session['print_id']=print_list
+
             return render(request, 'confirmed.html')
 
-    return render(request, 'confirm.html')
+    return render(request, 'confirm_online.html')
 
 def print_id(request):
-    printid=request.session['print_id']
-    participant_obj = ParticipantsDetail.objects.filter(zeal_id=printid).values_list()
-    return render(request, 'icard.html', {'participant_obj':participant_obj})
+    
+    d=defaultdict(list)
+    i=0
+
+    for p in request.session['print_id']:
+    # printid=request.session['print_id']
+        participant_obj = ParticipantsDetail.objects.filter(zeal_id=p).values_list()
+        d[i].append(participant_obj)
+        i += 1
+
+    print d
+
+
+
+    # print d[0][0][0]
+    # print d[0][0][0][1]
+    # print d[0][0][0][8]
+    # print d[0][0][0][2]
+    # print d[0][0][0][6]
+
+
+    return render(request, 'icard.html', {'d':d})

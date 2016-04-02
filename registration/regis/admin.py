@@ -1,5 +1,6 @@
 from django.contrib import admin
 from regis.models import ParticipantsDetail, ParticipantsOnline
+from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
 class ParticipantAdmin(admin.ModelAdmin):
@@ -8,7 +9,7 @@ class ParticipantAdmin(admin.ModelAdmin):
 	search_fields = ('email',)
 
 
-class ParticipantOnline(admin.ModelAdmin):
+class ParticipantOnline(ImportExportModelAdmin):
 	list_display = ('zeal_id_temp','name','email','course','branch','contact','college','year',)
 	
 
