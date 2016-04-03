@@ -46,7 +46,8 @@
   </form>
     <input type="button" value="Back" onClick="history.go(-1)">
   <form method="POST" action="{% url 'reset' %}">
-    <input type="button" value="Reset Counter">
+    {% csrf_token %}
+    <input type="submit" value="Reset" action="{% url 'reset' %}">
   </form>
   </p>
   {% if error %}

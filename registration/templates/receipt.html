@@ -45,12 +45,20 @@
 
   <p>
     <a href="/index"> Home </a>
-    <input type="button" value="Print" onClick="window.print()">
+    <form method="POST" action="{% url 'printed_receipt' %}">
+      {% csrf_token %}
+    <input type="submit" value="Print" onClick="window.print()">
+  </form>
     <input type="button" value="Back" onClick="history.go(-1)">
+    <form method="POST" action="{% url 'reset' %}">
+      {% csrf_token %}
+    <input type="submit" value="Reset" action="{% url 'reset' %}">
+  </form>
   </p>
   {% if error %}
   <strong> Sorry ! </strong> No receipts to print .
   {% else %}
+  {% for i in participant_obj %}
 <div class="container">
   <div class="i-card">
     <div class="logo">
@@ -61,17 +69,17 @@
     <div class="details">
      <p>     
         <strong>Name</strong><br>
-            <br>
+            {{i.name}}<br>
         <strong>Email</strong><br>
-            <br>
+           {{i.email}} <br>
         <strong>College</strong><br>
-            <br>
+            {{i.college}}<br>
         <strong>Fees</strong><br>
-      </p>          
+      {{i.fee}}</p>          
     </div>
   </div>
 
-  <div class="i-card">
+  <!-- <div class="i-card">
     <div class="logo">
         <img src="{% static "images/zeal_logo.png" %}">
         <p>JSSATEN<br>www.zealicon.in</p>
@@ -207,7 +215,8 @@
     </p>          
     </div>
   </div>            
-</div>
+</div> -->
+{% endfor%}
 {% endif %}
 </body>
 </html>

@@ -170,9 +170,9 @@ def print_receipt(request):
     try:
         participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
 
-        return render(request,'icard.html',{'participant_obj':participant_obj})
+        return render(request,'receipt.html',{'participant_obj':participant_obj})
     except:
-        return render(request, "icard.html", {'error':1})
+        return render(request, "receipt.html", {'error':1})
 
 def printed_id(request):
     if request.method=="POST":
@@ -180,26 +180,30 @@ def printed_id(request):
         for i in participant_obj:
             i.id_card_print=True
             i.save()
-        return HttpResponseRedirect('/index')
+        return HttpResponseRedirect('/print')
 
     elif request.method=="GET":
         return render(request, 'index.html')    
 
 
-def printed_id(request):
+def printed_receipt(request):
     if request.method=="POST":
         participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
         for i in participant_obj:
             i.receipt_print=True
             i.save()
-        return HttpResponseRedirect('/index')
+        return HttpResponseRedirect('/print/receipt')
 
     elif request.method=="GET":
         return render(request, 'index.html')
 
+
 def reset_counter(request):
-    if request.method = "POST":
+    if request.method == "POST":
         del request.session['print_id']
+        return HttpResponseRedirect('/index')
+
+    elif request.method=="GET":
         return HttpResponseRedirect('/index')
 
 
