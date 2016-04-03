@@ -40,9 +40,14 @@
     </style>
     <p>
     <a href="/index"> Home </a>
-    <input type="button" value="Print" onClick="window.print()">
+    <form method="post" action="{% url 'printed_id' %}">
+      {% csrf_token %}
+    <input type="submit" value="Print" onClick="window.print()">
+  </form>
     <input type="button" value="Back" onClick="history.go(-1)">
+  <form method="POST" action="{% url 'reset' %}">
     <input type="button" value="Reset Counter">
+  </form>
   </p>
   {% if error %}
   <p><strong> Sorry ! </strong> No ID cards to print</p>
@@ -67,7 +72,7 @@
        </p>          
     </div>
   </div>
-  
+
 <!-- {{forloop.counter}} -->
 <!--   <div class="i-card">
     <div class="logo">

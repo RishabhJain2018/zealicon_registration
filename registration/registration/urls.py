@@ -17,4 +17,6 @@ urlpatterns = [
 	url(r'^print/$','regis.views.print_id', name='print'),
 
 	url(r'^print/receipt$', 'regis.views.print_receipt', name='print_receipts'),
+	url(r'^printed/$','regis.views.printed_id', name='printed_id'),
+	url(r'^reset/$','regis.views.reset_counter', name='reset'),
 ]
