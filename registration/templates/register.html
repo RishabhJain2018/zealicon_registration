@@ -130,6 +130,7 @@
                     <br>
                 <form role="form" method="POST" action="" id="registerform">
                     {% csrf_token %}
+                    <P> {{form.errors}}</p>
                     <div class="form-group">
                         <label class="control-label" for ="name"> Name : </label>
                         <input id="name" name="name" type="text" placeholder="Enter your name" class="form-control input md" required>

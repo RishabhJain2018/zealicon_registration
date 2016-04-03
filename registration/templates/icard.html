@@ -42,10 +42,12 @@
     <a href="/index"> Home </a>
     <input type="button" value="Print" onClick="window.print()">
     <input type="button" value="Back" onClick="history.go(-1)">
+    <input type="button" value="Reset Counter">
   </p>
   {% if error %}
   <p><strong> Sorry ! </strong> No ID cards to print</p>
-  {% else %} 
+  {% else %}
+  {% for i in participant_obj %}
 <div class="container">
   <div class="i-card">
     <div class="logo">
@@ -55,18 +57,19 @@
     <div class="details">
      <p>     
      <strong>Name</strong><br>
-       {{participant_obj.0.1}}<br>
+       {{i.name}}<br>
          <strong>Zeal ID</strong><br>
-       Z-0001<br>
+       {{i.zeal_id}}<br>
          <strong>Email</strong><br>
-       {{participant_obj.0.2}}<br>
+       {{i.email}}<br>
          <strong>College</strong><br>
-       {{participant_obj.0.6}}
+       {{i.college}}
        </p>          
     </div>
   </div>
-
-  <div class="i-card">
+  
+<!-- {{forloop.counter}} -->
+<!--   <div class="i-card">
     <div class="logo">
         <img src="{% static "images/zeal_logo.png" %}">
         <p>JSSATEN<br>www.zealicon.in</p>
@@ -74,17 +77,23 @@
     <div class="details">
      <p>     
      <strong>Name</strong><br>
-       Rishabh<br>
+       {{i.name}}<br>
          <strong>Zeal ID</strong><br>
-       Z-0001<br>
+       {{i.zeal_id}}<br>
          <strong>Email</strong><br>
-       rishabh123@gmail.com<br>
+       {{i.email}}<br>
          <strong>College</strong><br>
-       JSS Academy of Technical Education
+       {{i.college}}
        </p>          
     </div>
-  </div>
-  <div class="i-card">
+  </div> -->
+
+  {% endfor %}
+{% endif %}
+
+
+
+  <!-- <div class="i-card">
     <div class="logo">
         <img src="{% static "images/zeal_logo.png" %}">
         <p>JSSATEN<br>www.zealicon.in</p>
@@ -210,8 +219,8 @@
        </p>          
     </div>
   </div>            
-</div>
-{% endif %}
+</div> -->
+
 </body>
 </html>
 

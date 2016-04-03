@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, Http404
 from django.template import Context, Template
 from django.shortcuts import get_object_or_404
-from collections import defaultdict
+# from collections import defaultdict
 
 
 def administrator(request):
@@ -28,7 +28,6 @@ def administrator(request):
         elif user.is_staff:
             auth.login(request, user)
             return HttpResponseRedirect('index/')
-            del request.session['print_id']
     elif request.method=="GET":
         return render(request, 'login.html')
 
@@ -159,31 +158,12 @@ def online_confirm(request):
     return render(request, 'confirm_online.html')
 
 def print_id(request):
-
-    d=defaultdict(list)
-    i=0
     try:
-        for p in request.session['print_id']:
-            participant_obj = ParticipantsDetail.objects.filter(zeal_id=p).values_list()
-            d[i].append(participant_obj)
-            i += 1
+        participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
 
-            # del request.session['print_id']
+        return render(request,'icard.html',{'participant_obj':participant_obj})
     except:
         return render(request, "icard.html", {'error':1})
-
-
-    print d
-
-
-
-    # print d[0][0][0]
-    # print d[0][0][0][1]
-    # print d[0][0][0][8]
-    # print d[0][0][0][2]
-    # print d[0][0][0][6]
-    
-    return render(request, 'icard.html', {'d':d})
 
 
 def print_receipt(request):
