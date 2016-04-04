@@ -85,11 +85,11 @@
                             <a href="/index/search/"><i class="fa fa-user fa-fw"></i> Already Registered </a>
                         </li>
                         <li>
-                            <a href="/print"><i class="fa fa-print fa-fw"></i> Print Id Card </a>
+                            <a href="/index/register/confirm/print/"><i class="fa fa-print fa-fw"></i> Print </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="/print/receipt"><i class="fa fa-print fa-fw"></i> Print Receipts </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
         
@@ -145,7 +145,7 @@
                          <input type="text" id="fee" name="fee" Value="{{data.fee}}" class="form-control input md" disabled>
                     </div><br>
                     <div class="form-group">
-                        <form method="POST" action="{% url 'confirm' %}">
+                        <form method="POST" action="{% url 'online_confirm' %}">
                              {% csrf_token %}
                                 <input type="hidden" name="name" value="{{data.name}}">
                                 <input type="hidden" name="email" value="{{data.email}}">

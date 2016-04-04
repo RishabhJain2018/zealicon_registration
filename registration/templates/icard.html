@@ -3,6 +3,7 @@
 <html>
 <head>
   <title> Zealicon 2k16 </title>
+
 </head>
 <body>
 
@@ -15,50 +16,54 @@
       justify-content: space-around;      
     }
     .i-card{
-        max-width: 300px;
+        width: 300px;
         height: 191px;
         border: 2px solid #ccc;
-        padding: 0 1%;
+        padding: 0 10px;
         display: flex;
         margin:25px 0;
     }
-    
+    .i-card>*{
+      flex-basis:50%;
+    }
     .logo{
-        text-align: center;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap:wrap;      
+      font-family: sans-serif;
     }
     
     .logo img{
-        padding: 15% 0 5%;
         display: block;
         height: 50%;
         max-width: 100%;
     }
     .details{
         text-align: right;
+        display: flex;
+        flex-direction:row;
+        justify-content:flex-end;
+        align-items:center;
     }
-    .details p{}
+    .details p{
+      word-break:break-all;
+      margin: 4px 0;
+      font-size: 13px;
+    }
     </style>
-    <p>
-    <a href="/index"> Home </a>
-    <form method="post" action="{% url 'printed_id' %}">
-      {% csrf_token %}
-    <input type="submit" value="Print" onClick="window.print()">
-  </form>
-    <input type="button" value="Back" onClick="history.go(-1)">
-  <form method="POST" action="{% url 'reset' %}">
-    {% csrf_token %}
-    <input type="submit" value="Reset" action="{% url 'reset' %}">
-  </form>
-  </p>
   {% if error %}
   <p><strong> Sorry ! </strong> No ID cards to print</p>
   {% else %}
-  {% for i in participant_obj %}
 <div class="container">
+  {% for i in participant_obj %}
   <div class="i-card">
     <div class="logo">
-        <img src="{% static "images/zeal_logo.png" %}">
-        <p>JSSATEN<br>www.zealicon.in</p>
+      <img style="margin:5px 0" src="{% static "images/zeal_logo.png" %}">
+      <p style="font-size:10px;margin:0;flex-basis:100%;">Sponsors</p>
+      <img src="{%static "images/logo.png" %}" style="height:35px;width:40px;margin:0 0 0 5px">
+      <img src="{%static "images/logo2.png" %}" style="height:30px;width:65px;margin:5px 0 0 35px">
+      <p style="flex-basis:100%;font-size:9px;margin:5px 0">JSSATEN<br>www.zealicon.in</p>
     </div>
     <div class="details">
      <p>     
@@ -73,160 +78,12 @@
        </p>          
     </div>
   </div>
-
-<!-- {{forloop.counter}} -->
-<!--   <div class="i-card">
-    <div class="logo">
-        <img src="{% static "images/zeal_logo.png" %}">
-        <p>JSSATEN<br>www.zealicon.in</p>
-    </div>
-    <div class="details">
-     <p>     
-     <strong>Name</strong><br>
-       {{i.name}}<br>
-         <strong>Zeal ID</strong><br>
-       {{i.zeal_id}}<br>
-         <strong>Email</strong><br>
-       {{i.email}}<br>
-         <strong>College</strong><br>
-       {{i.college}}
-       </p>          
-    </div>
-  </div> -->
-
   {% endfor %}
+</div>
 {% endif %}
-
-
-
-  <!-- <div class="i-card">
-    <div class="logo">
-        <img src="{% static "images/zeal_logo.png" %}">
-        <p>JSSATEN<br>www.zealicon.in</p>
-    </div>
-    <div class="details">
-     <p>     
-     <strong>Name</strong><br>
-       Rishabh<br>
-         <strong>Zeal ID</strong><br>
-       Z-0001<br>
-         <strong>Email</strong><br>
-       rishabh123@gmail.com<br>
-         <strong>College</strong><br>
-       JSS Academy of Technical Education
-       </p>          
-    </div>
-  </div>
-  <div class="i-card">
-    <div class="logo">
-        <img src="{% static "images/zeal_logo.png" %}">
-        <p>JSSATEN<br>www.zealicon.in</p>
-    </div>
-    <div class="details">
-     <p>     
-     <strong>Name</strong><br>
-       Rishabh<br>
-         <strong>Zeal ID</strong><br>
-       Z-0001<br>
-         <strong>Email</strong><br>
-       rishabh123@gmail.com<br>
-         <strong>College</strong><br>
-       JSS Academy of Technical Education
-       </p>          
-    </div>
-  </div>   
-  <div class="i-card">
-    <div class="logo">
-        <img src="{% static "images/zeal_logo.png" %}">
-        <p>JSSATEN<br>www.zealicon.in</p>
-    </div>
-    <div class="details">
-     <p>     
-     <strong>Name</strong><br>
-       Rishabh<br>
-         <strong>Zeal ID</strong><br>
-       Z-0001<br>
-         <strong>Email</strong><br>
-       rishabh123@gmail.com<br>
-         <strong>College</strong><br>
-       JSS Academy of Technical Education
-       </p>          
-    </div>
-  </div> 
-  <div class="i-card">
-    <div class="logo">
-        <img src="{% static "images/zeal_logo.png" %}">
-        <p>JSSATEN<br>www.zealicon.in</p>
-    </div>
-    <div class="details">
-     <p>     
-     <strong>Name</strong><br>
-       Rishabh<br>
-         <strong>Zeal ID</strong><br>
-       Z-0001<br>
-         <strong>Email</strong><br>
-       rishabh123@gmail.com<br>
-         <strong>College</strong><br>
-       JSS Academy of Technical Education
-       </p>          
-    </div>
-  </div>
-  <div class="i-card">
-    <div class="logo">
-        <img src="{% static "images/zeal_logo.png" %}">
-        <p>JSSATEN<br>www.zealicon.in</p>
-    </div>
-    <div class="details">
-     <p>     
-     <strong>Name</strong><br>
-       Rishabh<br>
-         <strong>Zeal ID</strong><br>
-       Z-0001<br>
-         <strong>Email</strong><br>
-       rishabh123@gmail.com<br>
-         <strong>College</strong><br>
-       JSS Academy of Technical Education
-       </p>          
-    </div>
-  </div>
-  <div class="i-card">
-    <div class="logo">
-        <img src="{% static "images/zeal_logo.png" %}">
-        <p>JSSATEN<br>www.zealicon.in</p>
-    </div>
-    <div class="details">
-     <p>     
-     <strong>Name</strong><br>
-       Rishabh<br>
-         <strong>Zeal ID</strong><br>
-       Z-0001<br>
-         <strong>Email</strong><br>
-       rishabh123@gmail.com<br>
-         <strong>College</strong><br>
-       JSS Academy of Technical Education
-       </p>          
-    </div>
-  </div>   
-  <div class="i-card">
-    <div class="logo">
-        <img src="{% static "images/zeal_logo.png" %}">
-        <p>JSSATEN<br>www.zealicon.in</p>
-    </div>
-    <div class="details">
-     <p>     
-     <strong>Name</strong><br>
-       Rishabh<br>
-         <strong>Zeal ID</strong><br>
-       Z-0001<br>
-         <strong>Email</strong><br>
-       rishabh123@gmail.com<br>
-         <strong>College</strong><br>
-       JSS Academy of Technical Education
-       </p>          
-    </div>
-  </div>            
-</div> -->
-
+<script type="text/javascript">
+  window.onload = window.print;
+</script>
 </body>
 </html>
 

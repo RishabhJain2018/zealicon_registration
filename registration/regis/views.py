@@ -33,8 +33,8 @@ def administrator(request):
 
 
 def index(request):
-    ''' Views for Dashboard '''
 
+    ''' Views for Dashboard '''
     return render(request, 'index.html')
 
 
@@ -60,6 +60,7 @@ def participants_register(request):
             return render(request, 'register.html', {'form':form})
     else:
         return render(request, 'register.html', {'form':form})
+
 
 def confirm(request):
 
@@ -87,13 +88,16 @@ def confirm(request):
                 print_list=request.session['print_id']
                 print_list.append("Zeal"+str(participant.id))
                 request.session['print_id']=print_list
+                length=len(request.session['print_id'])
+                return HttpResponseRedirect('print/')
 
-            return render(request, 'confirmed.html')
+            # return render(request, 'confirmed.html',{'length':length})
 
     return render(request, 'confirm.html')
 
 
 def search(request):
+
     ''' Views for online registration'''
 
     if request.method=="POST":
@@ -152,15 +156,17 @@ def online_confirm(request):
                 print_list=request.session['print_id']
                 print_list.append("Zeal"+str(participant.id))
                 request.session['print_id']=print_list
+                print len(request.session['print_id'])
 
-            return render(request, 'confirmed.html')
+        return HttpResponseRedirect('confirm/print/online')
 
-    return render(request, 'confirm_online.html')
+    elif request.method=="GET":
+        return render(request, 'confirm_online.html')
+
 
 def print_id(request):
     try:
         participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
-
         return render(request,'icard.html',{'participant_obj':participant_obj})
     except:
         return render(request, "icard.html", {'error':1})
@@ -173,6 +179,7 @@ def print_receipt(request):
         return render(request,'receipt.html',{'participant_obj':participant_obj})
     except:
         return render(request, "receipt.html", {'error':1})
+
 
 def printed_id(request):
     if request.method=="POST":
@@ -192,19 +199,31 @@ def printed_receipt(request):
         for i in participant_obj:
             i.receipt_print=True
             i.save()
-        return HttpResponseRedirect('/print/receipt')
-
     elif request.method=="GET":
-        return render(request, 'index.html')
+        print "enter else"
+        return HttpResponseRedirect('/print/receipt')
 
 
 def reset_counter(request):
-    if request.method == "POST":
+    if request.method == "GET":
         del request.session['print_id']
         return HttpResponseRedirect('/index')
 
-    elif request.method=="GET":
-        return HttpResponseRedirect('/index')
+    # elif request.method=="GET":
+        # return HttpResponseRedirect('/index')
 
 
+def print_offline(request):
+    if not 'print_id' in request.session or not request.session['print_id']:
+        return render(request,'confirmed.html',{'error':1})
+    else:
+        length=len(request.session['print_id'])
+        return render(request, 'confirmed.html', {'length':length})
 
+
+def print_online(request):
+    if not 'print_id' in request.session or not request.session['print_id']:
+        return render(request,'confirmed.html',{'error':1})
+    else:
+        length=len(request.session['print_id'])
+        return render(request, 'confirmed.html', {'length':length})
