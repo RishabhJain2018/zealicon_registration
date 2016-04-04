@@ -9,7 +9,6 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, Http404
 from django.template import Context, Template
 from django.shortcuts import get_object_or_404
-# from collections import defaultdict
 
 
 def administrator(request):
@@ -84,11 +83,13 @@ def confirm(request):
             if not 'print_id' in request.session or not request.session['print_id']:
                 request.session['print_id']=["Zeal"+str(participant.id)]
                 print request.session['print_id']
+
             else:
                 print_list=request.session['print_id']
                 print_list.append("Zeal"+str(participant.id))
                 request.session['print_id']=print_list
                 length=len(request.session['print_id'])
+
                 return HttpResponseRedirect('print/')
 
             # return render(request, 'confirmed.html',{'length':length})
@@ -146,17 +147,16 @@ def online_confirm(request):
             participant.fee=form.cleaned_data['fee']
             participant.save()
             participant_details=ParticipantsDetail.objects.get(pk=participant.id)
-            participant_details.zeal_id="Zeal"+str(participant.id)
+            participant_details.zeal_id="Z16_"+str(participant.id)
             participant_details.save()
 
 
             if not 'print_id' in request.session or not request.session['print_id']:
-                request.session['print_id']=["Zeal"+str(participant.id)]
+                request.session['print_id']=["Z16_"+str(participant.id)]
             else:
                 print_list=request.session['print_id']
-                print_list.append("Zeal"+str(participant.id))
+                print_list.append("Z16_"+str(participant.id))
                 request.session['print_id']=print_list
-                print len(request.session['print_id'])
 
         return HttpResponseRedirect('confirm/print/online')
 
@@ -166,7 +166,12 @@ def online_confirm(request):
 
 def print_id(request):
     try:
+        print "inside"
         participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
+        # Loop to set the set flag value.
+        for i in participant_obj:
+            i.id_card_print=True
+            i.save()
         return render(request,'icard.html',{'participant_obj':participant_obj})
     except:
         return render(request, "icard.html", {'error':1})
@@ -175,22 +180,25 @@ def print_id(request):
 def print_receipt(request):
     try:
         participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
-
+        # Loop to set the flag value
+        for i in participant_obj:
+            i.receipt_print=True
+            i.save()
         return render(request,'receipt.html',{'participant_obj':participant_obj})
     except:
         return render(request, "receipt.html", {'error':1})
 
 
-def printed_id(request):
-    if request.method=="POST":
-        participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
-        for i in participant_obj:
-            i.id_card_print=True
-            i.save()
-        return HttpResponseRedirect('/print')
+# def printed_id(request):
+#     if request.method=="POST":
+#         participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
+#         for i in participant_obj:
+#             i.id_card_print=True
+#             i.save()
+#         return HttpResponseRedirect('/print')
 
-    elif request.method=="GET":
-        return render(request, 'index.html')    
+#     elif request.method=="GET":
+#         return render(request, 'index.html')    
 
 
 def printed_receipt(request):
@@ -227,3 +235,46 @@ def print_online(request):
     else:
         length=len(request.session['print_id'])
         return render(request, 'confirmed.html', {'length':length})
+
+
+def custom(request):
+    if request.method=="POST":
+        search=request.POST.get('search')
+        try:
+            print "inside try"
+            zeal_id_obj=ParticipantsDetail.objects.get(email=search)
+            print zeal_id_obj
+            print "1"
+
+            if not 'print_id' in request.session or not request.session['print_id']:
+                request.session['print_id']=["Z16_"+str(zeal_id_obj.id)]
+                length=len(request.session['print_id'])
+
+                return render(request, 'confirmed.html',{'length':length})
+                print "2"
+
+            else:
+                print "inside else"
+                print_list=request.session['print_id']
+                print "3"
+                print_list.append("Z16_"+str(zeal_id_obj.id))
+                print "4"
+                request.session['print_id']=print_list
+                print "5"
+                print request.session['print_id']
+
+                length=len(request.session['print_id'])
+                print length
+
+                return render(request, 'confirmed.html',{'length':length})
+
+        except:
+            print "inside except"
+            pass
+
+    elif request.method=="GET":
+        return render(request,'custom_search.html')
+
+
+
+

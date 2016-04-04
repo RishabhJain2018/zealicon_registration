@@ -13,8 +13,9 @@
 
     <title>Zealicon 2k16</title>
 
-
+    
     <link href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css"%}" rel="stylesheet">
+
 
     <link href="{% static "bower_components/metisMenu/dist/metisMenu.min.css"%}" rel="stylesheet">
 
@@ -26,18 +27,16 @@
 
     <link href="{% static "bower_components/font-awesome/css/font-awesome.min.css"%}" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="{% static "js/confirm.js" %}"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
-
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 </head>
 
 <body>
 
     <div id="wrapper">
 
-
+    
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -48,12 +47,12 @@
                 </button>
                 <a class="navbar-brand">Zealicon'16</a>
             </div>
-    
+        
 
             <ul class="nav navbar-top-links navbar-right">
                 
                 
-        
+            
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -62,11 +61,11 @@
                         <li><a href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
-            
+                
                 </li>
-        
+            
             </ul>
-    
+        
 
              <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -91,40 +90,61 @@
                 </div>
         
             </div>
-    
+        
         </nav>
 
         <div id="page-wrapper">
-            {% if error %} <h2 style="margin:30px 20px;"> No I-Cards To Print. </h2>
-            {% else %}
-            <h2 style="margin:30px 20px;">Thanks for registering.</h2>
             <div class="row">
-                <div class="col-sm-3">
-                    <a href="/print/" target="_blank" onclick ="reset_session()" class="btn btn-primary btn-lg">Print Id Cards {{length}} </a>
+                {% if error %}
+                <div class="col-lg-12">
+                    <h1 class="page-header text-center">User Not Registered . Click <a href="index/register"> here </a> to register.</h1>
                 </div>
-                <div class="col-sm-3">
-                    <a href="/reset" class="btn btn-danger">Reset current session</a>
+                {% else %}
+                <div class="col-lg-12">
+                    <h1 class="page-header text-center">Search Participant</h1>
                 </div>
-                <div class="col-sm-3">
-                    <a href="/index" class="btn btn-primary">Register new participant</a>
-                </div>
-                <div class="col-sm-3">
-                    <a href="/print/receipt" target="_blank" class="btn btn-primary"> Print Receipts {{length}}</a>
-                </div>
+            
             </div>
-        {% endif %}
-        </div>
+        
+            <div class="row">
+                <br><br><br><br>
+                <form method="POST">
+                    {% csrf_token %}
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="form-group">
+                        <label>Enter the Email Id:</label>
+                        <input type="text" name="search" id="search" class="form-control">
+                        <p class="help-block">Example: abc@gmail.com </p>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" id="submitbtn" name="submitbtn" class="col-lg-offset-1 btn btn-primary btn-lg" value="Search">
+                    </div>
+                </div>
+            </form>
+            </div>
+            
+    
+
+    </div>
+
+{% endif %}
 
     <script src="{% static "bower_components/jquery/dist/jquery.min.js"%}"></script>
 
+
     <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js"%}"></script>
 
+
     <script src="{% static "bower_components/metisMenu/dist/metisMenu.min.js"%}"></script>
+
 
     <script src="{% static "bower_components/raphael/raphael-min.js"%}"></script>
     <script src="{% static "bower_components/morrisjs/morris.min.js"%}"></script>
     <script src="{% static "js/morris-data.js"%}"></script>
-    <script src="{% static "dist/js/sb-admin-2.js"%}"></script>
+
+
+    <script src="{%static "dist/js/sb-admin-2.js"%}"></script>
+
 </body>
 
 </html>
