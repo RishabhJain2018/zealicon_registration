@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import ParticipantsForm
-from django.views.generic import View
 from regis.models import ParticipantsDetail, ParticipantsOnline, SearchOnline
 from django.contrib import auth
 from django.contrib.auth.models import User,Group
@@ -26,6 +25,7 @@ def administrator(request):
             return HttpResponseRedirect('admin/')
         elif user.is_staff:
             auth.login(request, user)
+            request.session['session']=user.username
             return HttpResponseRedirect('index/')
     elif request.method=="GET":
         return render(request, 'login.html')
@@ -34,7 +34,13 @@ def administrator(request):
 def index(request):
 
     ''' Views for Dashboard '''
-    return render(request, 'index.html')
+
+    if request.session['session']:
+        print "1"
+        return render(request, 'index.html')
+    else:
+        print "2"
+        return render(request, 'login.html')
 
 
 def participants_register(request):
@@ -99,7 +105,7 @@ def confirm(request):
 
 def search(request):
 
-    ''' Views for online registration'''
+    ''' Views for online registration search'''
 
     if request.method=="POST":
         search=request.POST.get('search')
@@ -116,6 +122,9 @@ def search(request):
 
 
 def online_register(request):
+
+    ''' Views for online registration '''
+
     if request.method=="POST":
         form=ParticipantsForm(request.POST)
         if form.is_valid():
@@ -134,6 +143,8 @@ def online_register(request):
 
 
 def online_confirm(request):
+
+    ''' Views for online Conformation '''
 
     if request.method=="POST":
         form=ParticipantsForm(request.POST)
@@ -165,6 +176,8 @@ def online_confirm(request):
 
 
 def print_id(request):
+
+    ''' Views to print the ID'''
     try:
         print "inside"
         participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
@@ -178,6 +191,8 @@ def print_id(request):
 
 
 def print_receipt(request):
+
+    ''' Views to print the Receipt '''
     try:
         participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
         # Loop to set the flag value
@@ -189,39 +204,17 @@ def print_receipt(request):
         return render(request, "receipt.html", {'error':1})
 
 
-# def printed_id(request):
-#     if request.method=="POST":
-#         participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
-#         for i in participant_obj:
-#             i.id_card_print=True
-#             i.save()
-#         return HttpResponseRedirect('/print')
-
-#     elif request.method=="GET":
-#         return render(request, 'index.html')    
-
-
-def printed_receipt(request):
-    if request.method=="POST":
-        participant_obj = ParticipantsDetail.objects.filter(zeal_id__in=request.session['print_id'])
-        for i in participant_obj:
-            i.receipt_print=True
-            i.save()
-    elif request.method=="GET":
-        print "enter else"
-        return HttpResponseRedirect('/print/receipt')
-
-
 def reset_counter(request):
     if request.method == "GET":
         del request.session['print_id']
         return HttpResponseRedirect('/index')
 
-    # elif request.method=="GET":
-        # return HttpResponseRedirect('/index')
 
 
 def print_offline(request):
+
+    ''' Views for print id number display '''
+
     if not 'print_id' in request.session or not request.session['print_id']:
         return render(request,'confirmed.html',{'error':1})
     else:
@@ -230,6 +223,9 @@ def print_offline(request):
 
 
 def print_online(request):
+
+    ''' Views for online print id number display'''
+
     if not 'print_id' in request.session or not request.session['print_id']:
         return render(request,'confirmed.html',{'error':1})
     else:
@@ -238,39 +234,28 @@ def print_online(request):
 
 
 def custom(request):
+
+    ''' Views for custom Search '''
+
     if request.method=="POST":
         search=request.POST.get('search')
         try:
-            print "inside try"
             zeal_id_obj=ParticipantsDetail.objects.get(email=search)
-            print zeal_id_obj
-            print "1"
-
             if not 'print_id' in request.session or not request.session['print_id']:
                 request.session['print_id']=["Z16_"+str(zeal_id_obj.id)]
                 length=len(request.session['print_id'])
-
                 return render(request, 'confirmed.html',{'length':length})
-                print "2"
-
             else:
-                print "inside else"
                 print_list=request.session['print_id']
-                print "3"
                 print_list.append("Z16_"+str(zeal_id_obj.id))
-                print "4"
                 request.session['print_id']=print_list
-                print "5"
                 print request.session['print_id']
-
                 length=len(request.session['print_id'])
-                print length
 
                 return render(request, 'confirmed.html',{'length':length})
 
         except:
-            print "inside except"
-            pass
+            return render(request,'custom_search.html')
 
     elif request.method=="GET":
         return render(request,'custom_search.html')
