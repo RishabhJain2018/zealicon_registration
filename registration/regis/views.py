@@ -25,8 +25,8 @@ def administrator(request):
             return HttpResponseRedirect('admin/')
         elif user.is_staff:
             auth.login(request, user)
-            request.session['session']=user.username
             return HttpResponseRedirect('index/')
+
     elif request.method=="GET":
         return render(request, 'login.html')
 
@@ -35,12 +35,8 @@ def index(request):
 
     ''' Views for Dashboard '''
 
-    if request.session['session']:
-        print "1"
-        return render(request, 'index.html')
-    else:
-        print "2"
-        return render(request, 'login.html')
+    return render(request, 'index.html')
+  
 
 
 def participants_register(request):
@@ -48,7 +44,6 @@ def participants_register(request):
     ''' Views to register a Student '''
 
     form=ParticipantsForm()
-
     if request.method=="POST":
         form=ParticipantsForm(request.POST)
         if form.is_valid():
