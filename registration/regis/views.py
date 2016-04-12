@@ -30,9 +30,9 @@ def administrator(request):
         elif request.method=="GET":
             return render(request, 'login.html')
     else:
-        retutn HttpResponseRedirect("/index")
+        return HttpResponseRedirect("/index")
 
-
+        
 def index(request):
 
     ''' Views for Dashboard '''
