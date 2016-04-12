@@ -23,5 +23,6 @@ urlpatterns = [
 	url(r'^reset/$','regis.views.reset_counter', name='reset'),
 
 	url(r'^custom/$', 'regis.views.custom', name='custom'),
+	url(r'^logout/$', 'regis.views.logout', name='logout'),
 
 ]
