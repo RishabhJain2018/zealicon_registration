@@ -26,6 +26,9 @@ def administrator(request):
             elif user.is_staff:
                 auth.login(request, user)
                 return HttpResponseRedirect('index/')
+            else:
+                auth.login(request, user)
+                return HttpResponseRedirect('index/')
 
         elif request.method=="GET":
             return render(request, 'login.html')
@@ -289,6 +292,7 @@ def custom(request):
 def logout(request):
     if request.user.is_authenticated():
         auth.logout(request)
+        return render(request, 'login.html')
     else:
         return render(request, 'login.html')
 
