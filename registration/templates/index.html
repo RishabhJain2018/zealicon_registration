@@ -87,6 +87,11 @@
                         <li>
                             <a href="/custom"><i class="fa fa-print fa-fw"></i> Custom Search </a>
                         </li>
+                        {% if request.user.groups.all.0.name == 'quanta' %}
+                        <li>
+                            <a href="/custom"><i class="fa fa-print fa-fw"></i> View Records </a>
+                        </li>
+                        {%endif%}
                     </ul>
                 </div>
         

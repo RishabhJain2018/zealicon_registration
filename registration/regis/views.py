@@ -297,5 +297,7 @@ def logout(request):
         return render(request, 'login.html')
 
 
+def view_record(request):
+    pass
 
 
