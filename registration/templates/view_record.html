@@ -114,13 +114,16 @@
                         <th>Total Amount</th>
                     </tr>
                 <tbody>
-
+                        {% for i in transaction %}
                             <tr style="font-size:20px" class="">
                             <td>{{forloop.counter}}</td>
-                            <td>{{j.username}}</td>
-                            <td>{{i.CurrentQuestionNo}}</td>
-                            <td>{{i.college}}</td>
+                            <td>{{i.username_id}}</td>
+                            <td>{{i.society}}</td>
+                            <td>{{i.jss_registration}}</td>
+                            <td>{{i.other_registration}}</td>
+                            <td>{{i.amount}}</td>
                             </tr>
+                        {% endfor %}
                 </table>
                 </div>
             </div>

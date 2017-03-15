@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'regis',
     'import_export',
     'profiles',
+    'transaction',
 )
 
 MIDDLEWARE_CLASSES = (

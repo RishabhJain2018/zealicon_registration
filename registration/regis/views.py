@@ -2,12 +2,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import ParticipantsForm
 from regis.models import ParticipantsDetail, ParticipantsOnline, SearchOnline
+from profiles.models import UserDetail
+from transaction.models import Transaction
 from django.contrib import auth
 from django.contrib.auth.models import User,Group
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, Http404
 from django.template import Context, Template
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def administrator(request):
@@ -101,6 +104,42 @@ def confirm(request):
                     print_list.append("Zeal"+str(participant.id))
                     request.session['print_id']=print_list
                     length=len(request.session['print_id'])
+
+                # Logic to complete the transaction table.
+
+                users = User.objects.exclude(username__contains='root')
+                participant_created = []
+                user_detail = []
+                for user in users:
+                    participant_created.append(ParticipantsDetail.objects.filter(created_by=user))
+
+                for i in participant_created:
+                    jss_count = 0
+                    others_count = 0
+                    amount = 0
+                    for j in xrange(0,len(i)):
+                        if i[j].college == "JSS Academy of Technical Education [JSSATE], Noida":
+                            jss_count+=1
+                        else:
+                            others_count+=1
+                        created = i[j].created_by
+
+                    society = UserDetail.objects.get(user=created).college_society
+                    amount = jss_count*150 + others_count * 200
+
+                    try:
+                        transaction = Transaction.objects.get(username=created)
+                        transaction.username=created
+                        transaction.society=society
+                        transaction.jss_registration=jss_count
+                        transaction.other_registration=others_count
+                        transaction.amount=amount
+                        transaction.save()
+
+                    except ObjectDoesNotExist:
+                        Transaction.objects.create(username=created,society=society,
+                                                    jss_registration=jss_count,other_registration=others_count,
+                                                    amount=amount)
 
             return HttpResponseRedirect('print/')
 
@@ -299,6 +338,43 @@ def logout(request):
 
 
 def view_record(request):
-    user = User.objects.all()
+    transaction = Transaction.objects.all()
+    print "transaction", transaction[0].username_id
+    return render(request, 'view_record.html', {'transaction':transaction})
 
 
+# Logic for Transaction table.
+ 
+# users = User.objects.exclude(username__contains='root')
+# participant_created = []
+# user_detail = []
+# for user in users:
+#     participant_created.append(ParticipantsDetail.objects.filter(created_by=user))
+
+# for i in participant_created:
+#     jss_count = 0
+#     others_count = 0
+#     amount = 0
+#     for j in xrange(0,len(i)):
+#         if i[j].college == "JSS Academy of Technical Education [JSSATE], Noida":
+#             jss_count+=1
+#         else:
+#             others_count+=1
+#         created = i[j].created_by
+
+#     society = UserDetail.objects.get(user=created).college_society
+#     amount = jss_count*150 + others_count * 200
+
+#     try:
+#         transaction = Transaction.objects.get(username=created)
+#         transaction.username=created
+#         transaction.society=society
+#         transaction.jss_registration=jss_count
+#         transaction.other_registration=others_count
+#         transaction.amount=amount
+#         transaction.save()
+
+#     except ObjectDoesNotExist:
+#         Transaction.objects.create(username=created,society=society,
+#                                     jss_registration=jss_count,other_registration=others_count,
+#                                     amount=amount)
