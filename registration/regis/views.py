@@ -86,6 +86,7 @@ def confirm(request):
                 
                 participant=form.save(commit=False)
                 participant.fee=form.cleaned_data['fee']
+                participant.created_by = User.objects.get(username=request.user)
                 participant.save()
                 participant_details=ParticipantsDetail.objects.get(pk=participant.id)
                 participant_details.zeal_id = "Zeal"+str(participant.id)
@@ -167,6 +168,7 @@ def online_confirm(request):
                 
                 participant=form.save(commit=False)
                 participant.fee=form.cleaned_data['fee']
+                participant.created_by = User.objects.get(username=request.user)
                 participant.save()
                 participant_details=ParticipantsDetail.objects.get(pk=participant.id)
                 participant_details.zeal_id="Z16_"+str(participant.id)

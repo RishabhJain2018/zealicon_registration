@@ -4,9 +4,9 @@ from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
 class ParticipantAdmin(admin.ModelAdmin):
-	list_display = ('name','email','course','branch','contact','college','year','zeal_id','fee','id_card_print','receipt_print',)
-	list_filter = ('email','college','branch','year',)
-	search_fields = ('email',)
+	list_display = ('name','email','course','branch','contact','college','year','zeal_id','fee','id_card_print','receipt_print','created_by',)
+	list_filter = ('email','college','branch','year','created_by',)
+	search_fields = ('email','created_by',)
 
 
 class ParticipantOnline(ImportExportModelAdmin):

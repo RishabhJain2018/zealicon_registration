@@ -145,7 +145,7 @@
                          <input type="text" id="fee" name="fee" Value="{{data.fee}}" class="form-control input md" disabled>
                     </div><br>
                     <div class="form-group">
-                        <form method="POST" action="{% url 'online_confirm' %}">
+                        <form method="POST" action="{% url 'confirm' %}">
                              {% csrf_token %}
                                 <input type="hidden" name="name" value="{{data.name}}">
                                 <input type="hidden" name="email" value="{{data.email}}">
