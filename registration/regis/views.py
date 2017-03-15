@@ -102,11 +102,10 @@ def confirm(request):
                     request.session['print_id']=print_list
                     length=len(request.session['print_id'])
 
-                    return HttpResponseRedirect('print/')
+            return HttpResponseRedirect('print/')
 
-            # return render(request, 'confirmed.html',{'length':length})
-
-        return render(request, 'confirm.html')
+        elif request.method=="GET":
+            return render(request, 'confirm.html')
     else:
         return render(request, 'login.html')
 
@@ -300,6 +299,6 @@ def logout(request):
 
 
 def view_record(request):
-    pass
+    user = User.objects.all()
 
 
