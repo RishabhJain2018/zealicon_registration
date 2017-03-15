@@ -294,7 +294,7 @@ def custom(request):
 def logout(request):
     if request.user.is_authenticated():
         auth.logout(request)
-        return render(request, 'login.html')
+        return HttpResponseRedirect("/")
     else:
         return render(request, 'login.html')
 
