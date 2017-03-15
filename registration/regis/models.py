@@ -15,6 +15,7 @@ class ParticipantsDetail(models.Model):
     fee=models.IntegerField()
     id_card_print=models.BooleanField(default=False)
     receipt_print=models.BooleanField(default=False)
+    created_by=models.ForeignKey(User)
 
 
 class ParticipantsOnline(models.Model):
