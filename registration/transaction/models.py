@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Transaction(models.Model):
     username=models.OneToOneField(User)
-    society=models.EmailField(max_length=200,null=True)
+    society=models.CharField(max_length=200,null=True)
     jss_registration=models.CharField(max_length=10, null=True)
     other_registration=models.CharField(max_length=10,null=True)
     amount=models.CharField(max_length=10,null=True)

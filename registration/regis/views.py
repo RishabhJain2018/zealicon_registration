@@ -338,9 +338,14 @@ def logout(request):
 
 
 def view_record(request):
-    transaction = Transaction.objects.all()
-    print "transaction", transaction[0].username_id
-    return render(request, 'view_record.html', {'transaction':transaction})
+    if request.user.is_authenticated():
+        if request.user.groups.all()[0].name == 'quanta':
+            transaction = Transaction.objects.all()
+            return render(request, 'view_record.html', {'transaction':transaction})
+        else:
+            return render(request, 'error_404.html')
+    else:
+        return render(request, 'login.html')
 
 
 # Logic for Transaction table.
