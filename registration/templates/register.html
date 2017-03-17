@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Zealicon 2k16</title>
+    <title>Zealicon 2k17</title>
 
     <link href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
     
@@ -67,7 +67,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Zealicon'16</a>
+                <a class="navbar-brand" href="index.html">Zealicon'17</a>
             </div>
             
 
@@ -108,6 +108,11 @@
                         <li>
                             <a href="/custom"><i class="fa fa-print fa-fw"></i> Custom Search </a>
                         </li>
+                            {% if request.user.groups.all.0.name == 'quanta' %}
+                        <li>
+                            <a href="/view_record"><i class="fa fa-book fa-fw"></i> View Records </a>
+                        </li>
+                            {%endif%}
                     </ul>
                 </div>
         
