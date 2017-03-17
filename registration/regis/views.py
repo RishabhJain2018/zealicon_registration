@@ -341,7 +341,10 @@ def view_record(request):
     if request.user.is_authenticated():
         if request.user.groups.all()[0].name == 'quanta':
             transaction = Transaction.objects.all()
-            return render(request, 'view_record.html', {'transaction':transaction})
+            amount = 0
+            for i in transaction:
+                amount+=float(i.amount)
+            return render(request, 'view_record.html', {'transaction':transaction, 'amount':amount})
         else:
             return render(request, 'error_404.html')
     else:
