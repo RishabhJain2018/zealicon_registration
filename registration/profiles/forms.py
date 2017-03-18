@@ -15,4 +15,4 @@ class UserDetailForm(forms.ModelForm):
 
     class Meta:
         model = UserDetail
-        exclude = ['User']
+        exclude = ['user']
