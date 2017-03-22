@@ -20,12 +20,12 @@ class ParticipantsDetail(models.Model):
 
 class ParticipantsOnline(models.Model):
     zeal_id_temp=models.CharField(max_length=200,null=False)
-    name=models.CharField(max_length=200,null=False)
-    email=models.EmailField(max_length=200,null=False)
+    name=models.CharField(max_length=200,null=False,blank=False)
+    email=models.EmailField(max_length=200,null=False,blank=False,unique=True)
     course=models.CharField(max_length=200,null=False)
     branch=models.CharField(max_length=200,null=True,blank=True)
-    contact=models.CharField(max_length=10,null=False)
-    college=models.CharField(max_length=200,null=False)
+    contact=models.CharField(max_length=10,null=False,blank=False,unique=True)
+    college=models.CharField(max_length=200,null=False,blank=False)
     year=models.CharField(max_length=200,null=False)
 
 
