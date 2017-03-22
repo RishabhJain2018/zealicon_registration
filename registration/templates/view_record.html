@@ -104,32 +104,36 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                <div class="col-md-5">
                 <table class="table">
+                <col width="100">
+                <col width="200">
+                <col width="200">
+                <col width="250">
+                <col width="300">
+                <col width="250">
                     <tr style="font-size: 20px">
                         <th>S.No</th>
                         <th>Username</th>
                         <th>Society</th>
                         <th>No. of College Registrations</th>
                         <th>No. of Other College Registrations</th>
-                        <th>Total Amount</th>
+                        <th>Amount</th>
                     </tr>
                         {% for i in transaction %}
                     <tr style="font-size:20px">
-                        <td>{{forloop.counter}}</td>
-                        <td>{{i.username}}</td>
-                        <td>{{i.society}}</td>
-                        <td>{{i.jss_registration}}</td>
-                        <td>{{i.other_registration}}</td>
-                        <td>{{i.amount}}</td>
+                        <td align="left">{{forloop.counter}}</td>
+                        <td align="left">{{i.username}}</td>
+                        <td align="left">{{i.society}}</td>
+                        <td align="left">{{i.jss_registration}}</td>
+                        <td align="left">{{i.other_registration}}</td>
+                        <td align="left">{{i.amount}}</td>
                         {% endfor %}
                         </tr>
                     <tr style="font-size:20px">
-                        <td> Total Amount :</td>
+                        <td> Total:</td>
                         <td>{{amount}}</td>
                     </tr>
                 </table>
-                </div>
             </div>
             </div>
             
