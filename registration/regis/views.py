@@ -308,12 +308,12 @@ def custom(request):
             try:
                 zeal_id_obj=ParticipantsDetail.objects.get(email=search)
                 if not 'print_id' in request.session or not request.session['print_id']:
-                    request.session['print_id']=["Z16_"+str(zeal_id_obj.id)]
+                    request.session['print_id']=["Z17_"+str(zeal_id_obj.id)]
                     length=len(request.session['print_id'])
                     return render(request, 'confirmed.html',{'length':length})
                 else:
                     print_list=request.session['print_id']
-                    print_list.append("Z16_"+str(zeal_id_obj.id))
+                    print_list.append("Z17_"+str(zeal_id_obj.id))
                     request.session['print_id']=print_list
                     print request.session['print_id']
                     length=len(request.session['print_id'])
