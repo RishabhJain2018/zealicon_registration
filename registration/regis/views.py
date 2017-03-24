@@ -60,7 +60,7 @@ def participants_register(request):
             if form.is_valid():
                 data=form.cleaned_data
                 if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
-                    form.cleaned_data['fee']=150
+                    form.cleaned_data['fee']=200
                     fee=form.cleaned_data['fee']
                 else:
                     form.cleaned_data['fee']=200
@@ -83,7 +83,7 @@ def confirm(request):
             form=ParticipantsForm(request.POST)
             if form.is_valid():
                 if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
-                    form.cleaned_data['fee']=150
+                    form.cleaned_data['fee']=200
                 else:
                     form.cleaned_data['fee']=200
                 
@@ -125,7 +125,7 @@ def confirm(request):
                         created = i[j].created_by
 
                     society = UserDetail.objects.get(user=created).college_society
-                    amount = jss_count*150 + others_count * 200
+                    amount = jss_count*200 + others_count * 200
 
                     try:
                         transaction = Transaction.objects.get(username=created)
@@ -179,7 +179,7 @@ def online_register(request):
                 data=form.cleaned_data
 
                 if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
-                    form.cleaned_data['fee']=150
+                    form.cleaned_data['fee']=200
                     fee=form.cleaned_data['fee']
                 else:
                     form.cleaned_data['fee']=200
@@ -200,7 +200,7 @@ def online_confirm(request):
             form=ParticipantsForm(request.POST)
             if form.is_valid():
                 if form.cleaned_data['college']=="JSS Academy of Technical Education [JSSATE], Noida":
-                    form.cleaned_data['fee']=150
+                    form.cleaned_data['fee']=200
                 else:
                     form.cleaned_data['fee']=200
                 
@@ -371,7 +371,7 @@ def view_record(request):
 #         created = i[j].created_by
 
 #     society = UserDetail.objects.get(user=created).college_society
-#     amount = jss_count*150 + others_count * 200
+#     amount = jss_count*200 + others_count * 200
 
 #     try:
 #         transaction = Transaction.objects.get(username=created)
