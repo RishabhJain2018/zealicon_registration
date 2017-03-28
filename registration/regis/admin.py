@@ -11,7 +11,9 @@ class ParticipantAdmin(ImportExportModelAdmin):
 
 class ParticipantOnline(ImportExportModelAdmin):
 	list_display = ('zeal_id_temp','name','email','course','branch','contact','college','year',)
-	
+	list_filter = ('zeal_id_temp', 'email', 'college', 'year', 'college', 'email', 'branch')
+	search_fields = ('zeal_id_temp', 'email', 'college', 'year', 'college', 'email', 'branch')
+
 
 admin.site.register(ParticipantsDetail, ParticipantAdmin)
 admin.site.register(ParticipantsOnline, ParticipantOnline)
