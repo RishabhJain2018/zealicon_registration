@@ -13,6 +13,19 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
 
+def index(request):
+
+	''' Views for Dashboard '''
+
+	if request.user.is_authenticated():
+		if(request.user.groups.all()[0].name == 'others'):
+			return HttpResponseRedirect('/index/search/')
+		return render(request, 'index.html',{"others": False})
+	else:
+		return render(request,'login.html')
+  
+
+
 def administrator(request):
 	
 	''' Views For Login Into the Portal '''
@@ -31,23 +44,14 @@ def administrator(request):
 				return HttpResponseRedirect('index/')
 			else:
 				auth.login(request, user)
-				return HttpResponseRedirect('index/')
-
+				if(request.user.groups.all()[0].name == 'others'):
+					return HttpResponseRedirect('/index/search/')
+				return render(request, 'index.html',{"others": False})
 		elif request.method=="GET":
 			return render(request, 'login.html')
 	else:
 		return HttpResponseRedirect("/index")
 
-		
-def index(request):
-
-	''' Views for Dashboard '''
-
-	if request.user.is_authenticated():
-		return render(request, 'index.html')
-	else:
-		return render(request,'login.html')
-  
 
 
 def participants_register(request):
@@ -159,12 +163,18 @@ def search(request):
 			try:
 				zeal_id_obj = ParticipantsOnline.objects.get(zeal_id_temp=search)
 				if ParticipantsDetail.objects.filter(email=zeal_id_obj.email):
+					if(request.user.groups.all()[0].name == 'others'):
+						 return render(request, 'search_online.html',{"error": "Email id or Mobile number already registered."})
 					return render(request,'register_online.html',{"error": "Email id or Mobile number already registered."})
 			except:
+				if(request.user.groups.all()[0].name == 'others'):
+					return render(request, 'search_online.html',{"error": "Sorry, you have not registered online."})
 				return render(request, 'register_online.html', {'error': "Sorry, you have not registered online."})
 			zeal_id = ParticipantsOnline.objects.filter(zeal_id_temp=search).values_list()
+			if(request.user.groups.all()[0].name == 'others'):
+				print(zeal_id)
+				return render(request, 'search_online.html',{"zeal_id": zeal_id})
 			return render(request,'register_online.html',{"zeal_id": zeal_id})
-
 		return render(request, 'search_online.html')
 	else:
 		return render(request, 'login.html')
