@@ -1,13 +1,13 @@
-#Registration_Module
+# Registration_Module
 
 A new registration module for the Zealicon.
 
-#Installation
+# Installation
 
 The development of the Registration_Module server is running on Ubuntu, So this is the easiest environment to work with,
 but other distros of linux will work well.
 
-#Linux Based Setup For Registration_Module development
+# Linux Based Setup For Registration_Module development
 Note: Ubuntu 14.04 LTS is recommended to be used.
 
 1. After installing Ubuntu 14.04, refresh your apt package index
