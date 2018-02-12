@@ -77,8 +77,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'registration.wsgi.application'
+X_FRAME_OPTIONS = 'ALLOWALL'
 
-
+XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
