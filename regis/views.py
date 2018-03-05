@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .forms import ParticipantsForm
+from .forms import ParticipantsForm, OnlineForm
 from regis.models import ParticipantsDetail, ParticipantsOnline, SearchOnline
 from profiles.models import UserDetail
 from transaction.models import Transaction
@@ -24,6 +24,23 @@ def index(request):
 	else:
 		return render(request,'login.html')
   
+
+def online_regis(request):
+	''' View for online registeration form '''
+	if request.method == 'POST':
+		print(request.POST)
+		form = OnlineForm(request.POST)
+		if form.is_valid():
+			temp = form.save()
+			user = ParticipantsOnline.objects.get(pk=temp.id)
+			user.zeal_id_temp = 'ZO_'+str(temp.id)
+			user.save()
+			return HttpResponse("THANK YOY!")
+		else:
+			return render(request, "online.html", {'form':form})
+		return render(request, "online.html", {})
+	else:
+		return render(request, "online.html", {})
 
 
 def administrator(request):
@@ -160,8 +177,10 @@ def search(request):
 	if request.user.is_authenticated():
 		if request.method=="POST":
 			search=request.POST.get('search')
+			print("IN HERE!")
 			try:
 				zeal_id_obj = ParticipantsOnline.objects.get(zeal_id_temp=search)
+				#print(zeal_id_obj.name,"123")
 				if ParticipantsDetail.objects.filter(email=zeal_id_obj.email):
 					if(request.user.groups.all()[0].name == 'others'):
 						 return render(request, 'search_online.html',{"error": "Email id or Mobile number already registered."})
@@ -172,8 +191,8 @@ def search(request):
 				return render(request, 'register_online.html', {'error': "Sorry, you have not registered online."})
 			zeal_id = ParticipantsOnline.objects.filter(zeal_id_temp=search).values_list()
 			if(request.user.groups.all()[0].name == 'others'):
-				print(zeal_id)
 				return render(request, 'search_online.html',{"zeal_id": zeal_id})
+			print(zeal_id)
 			return render(request,'register_online.html',{"zeal_id": zeal_id})
 		return render(request, 'search_online.html')
 	else:

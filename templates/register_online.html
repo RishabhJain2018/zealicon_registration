@@ -17,11 +17,11 @@
                 {% if error %}
                     <h2>{{error}}<a href="/index/register">Click here</a> to register as a new participant.</h2>
                 {% else %}
-                <form role="form" method="POST" action="{% url 'online_register' %}" id="registerform">
+                <form role="form" method="POST" action="{% url 'online_register' %}">
                     {% csrf_token %}
                     <div class="form-group">
                         <label class="control-label" for ="name"> Name : </label>
-                        <input id="name" name="name" type="text" value="{{zeal_id.0.2}}" class="form-control input md" required>
+                        <input id="name" name="name" type="text" value="DFDgfgdgfdgfdGFDGFDGFD" class="form-control input md" required>
                     </div><br>
                     <div class="form-group">
                         <label class="control-label" for="email"> Email : </label>
