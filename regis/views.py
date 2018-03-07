@@ -18,6 +18,7 @@ def index(request):
 	''' Views for Dashboard '''
 
 	if request.user.is_authenticated():
+		print(request.user.groups.all())
 		if(request.user.groups.all()[0].name == 'others'):
 			return HttpResponseRedirect('/index/search/')
 		return render(request, 'index.html',{"others": False})
@@ -28,14 +29,15 @@ def index(request):
 def online_regis(request):
 	''' View for online registeration form '''
 	if request.method == 'POST':
-		print(request.POST)
+		# print(request.POST)
 		form = OnlineForm(request.POST)
 		if form.is_valid():
 			temp = form.save()
 			user = ParticipantsOnline.objects.get(pk=temp.id)
-			user.zeal_id_temp = 'ZO_'+str(temp.id)
+			zeal_id = 'ZO_'+str(temp.id)
+			user.zeal_id_temp = zeal_id
 			user.save()
-			return HttpResponse("THANK YOY!")
+			return render(request, "thank_you.html", {'zeal_id':zeal_id})
 		else:
 			return render(request, "online.html", {'form':form})
 		return render(request, "online.html", {})
