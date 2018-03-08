@@ -312,8 +312,9 @@ def print_offline(request):
 		if not 'print_id' in request.session or not request.session['print_id']:
 			return render(request,'confirmed.html',{'error':1})
 		else:
+			zeal_id = request.session['print_id'][-1]
 			length=len(request.session['print_id'])
-			return render(request, 'confirmed.html', {'length':length})
+			return render(request, 'confirmed.html', {'length':length, 'zeal_id': zeal_id})
 	else:
 		return render(request, 'login.html')
 
@@ -325,8 +326,9 @@ def print_online(request):
 		if not 'print_id' in request.session or not request.session['print_id']:
 			return render(request,'confirmed.html',{'error':1})
 		else:
+			zeal_id = request.session['print_id'][-1]
 			length=len(request.session['print_id'])
-			return render(request, 'confirmed.html', {'length':length})
+			return render(request, 'confirmed.html', {'length':length, 'zeal_id': zeal_id})
 	else:
 		return render(request, 'login.html')
 
