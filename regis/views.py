@@ -18,7 +18,7 @@ def index(request):
 	''' Views for Dashboard '''
 
 	if request.user.is_authenticated():
-		print(request.user.groups.all())
+		# print(request.user.groups.all())
 		if(request.user.groups.all()[0].name == 'others'):
 			return HttpResponseRedirect('/index/search/')
 		return render(request, 'index.html',{"others": False})
@@ -179,7 +179,6 @@ def search(request):
 	if request.user.is_authenticated():
 		if request.method=="POST":
 			search=request.POST.get('search')
-			print("IN HERE!")
 			try:
 				zeal_id_obj = ParticipantsOnline.objects.get(zeal_id_temp=search)
 				#print(zeal_id_obj.name,"123")
@@ -194,7 +193,7 @@ def search(request):
 			zeal_id = ParticipantsOnline.objects.filter(zeal_id_temp=search).values_list()
 			if(request.user.groups.all()[0].name == 'others'):
 				return render(request, 'search_online.html',{"zeal_id": zeal_id})
-			print(zeal_id)
+			# print(zeal_id)
 			return render(request,'register_online.html',{"zeal_id": zeal_id})
 		return render(request, 'search_online.html')
 	else:
