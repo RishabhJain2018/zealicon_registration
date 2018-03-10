@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>
+            DB_DETAILS
+        </title>
+    </head>
+
+    <body>
+        <div class="col-sm-3">
+            <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+        </div>
+        <div class="col-sm-3">
+            <a href="{% url 'print_all' %}" class="btn btn-primary">PRINT ALL SLIPS</a>
+        </div>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Zeal ID</th>
+            </tr>
+            {% for participant in participants %}
+            <tr>
+                <td>{{participant.name}}</td>
+                <td>{{participant.zeal_id}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

@@ -29,6 +29,7 @@ urlpatterns = [
 	url(r'^reset/$','regis.views.reset_counter', name='reset'),
 
 	url(r'^custom/$', 'regis.views.custom', name='custom'),
+	url(r'^print_all/$', 'regis.views.print_all', name='print_all'),
 	url(r'^logout/$', 'regis.views.logout', name='logout'),
 
 ]

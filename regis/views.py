@@ -18,9 +18,11 @@ def index(request):
 	''' Views for Dashboard '''
 
 	if request.user.is_authenticated():
-		print(request.user.groups.all())
 		if(request.user.groups.all()[0].name == 'others'):
 			return HttpResponseRedirect('/index/search/')
+		elif(request.user.groups.all()[0].name == 'db_view'):
+			all_participants = ParticipantsDetail.objects.all()
+			return render(request, 'db_details.html', {'participants':all_participants})
 		return render(request, 'index.html',{"others": False})
 	else:
 		return render(request,'login.html')
@@ -55,6 +57,13 @@ def administrator(request):
 			user=auth.authenticate(username=username, password=password)
 			if user==None:
 				return render(request, 'login.html',{'error':1})
+			if(user.groups.all()[0].name == 'db_view'):
+				auth.login(request,user)
+				all_participants = ParticipantsDetail.objects.all()
+				return render(request, 'db_details.html', {'participants':all_participants})
+			if(user.groups.all()[0].name == 'others'):
+				auth.login(request, user)
+				return HttpResponseRedirect('/index/search/')
 			if user.is_superuser:
 				auth.login(request, user)
 				return HttpResponseRedirect('admin/')
@@ -341,22 +350,19 @@ def custom(request):
 			search=request.POST.get('search')
 			try:
 				zeal_id_obj=ParticipantsDetail.objects.get(email=search)
-				print zeal_id_obj.__dict__
+				# print zeal_id_obj.__dict__
 				if not 'print_id' in request.session or not request.session['print_id']:
 					request.session['print_id']=[str(zeal_id_obj.zeal_id)]
 					length=len(request.session['print_id'])
-					return render(request, 'confirmed.html',{'length':length})
+					return render(request, 'confirmed.html',{'length':length, 'zeal_id':zeal_id_obj.__dict__['zeal_id']})
 				else:
 					print_list=request.session['print_id']
 					print_list.append(str(zeal_id_obj.zeal_id))
 					request.session['print_id']=print_list
 					length=len(request.session['print_id'])
-
-					return render(request, 'confirmed.html',{'length':length})
-
+					return render(request, 'confirmed.html',{'length':length, 'zeal_id':zeal_id_obj.__dict__['zeal_id']})
 			except:
 				return render(request,'custom_search.html')
-
 		elif request.method=="GET":
 			return render(request,'custom_search.html')
 	else:
@@ -381,6 +387,19 @@ def view_record(request):
 			return render(request, 'view_record.html', {'transaction':transaction, 'amount':amount})
 		else:
 			return render(request, 'error_404.html')
+	else:
+		return render(request, 'login.html')
+
+
+def print_all(request):
+	''' Views to print all ID cards despite of flag value'''
+	if request.user.is_authenticated():
+		if request.user.groups.all()[0].name == 'db_view':
+			try:
+				zeal_ids = ParticipantsDetail.objects.all()
+				return render(request,'icard.html',{'participant_obj':zeal_ids})
+			except:
+				HttpResponse("<center>ERROR OCCURED</center>")
 	else:
 		return render(request, 'login.html')
 
