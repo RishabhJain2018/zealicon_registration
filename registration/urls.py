@@ -10,7 +10,7 @@ urlpatterns = [
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^user/', include('profiles.urls')),
 	url(r'^main/', 'regis.views.administrator', name='base'),
-	url(r'^$', 'regis.views.online_regis', name='online_regis'),
+	url(r'^$', 'regis.views.online_registration', name='online_regis'),
 	url(r'^index/$', 'regis.views.index', name='index'),
 	url(r'^index/register/$','regis.views.participants_register', name='register'),
 	url(r'^index/register/confirm/$', 'regis.views.confirm', name='confirm'),

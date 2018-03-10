@@ -18,7 +18,6 @@ def index(request):
 	''' Views for Dashboard '''
 
 	if request.user.is_authenticated():
-		# print(request.user.groups.all())
 		if(request.user.groups.all()[0].name == 'others'):
 			return HttpResponseRedirect('/index/search/')
 		return render(request, 'index.html',{"others": False})
@@ -26,15 +25,14 @@ def index(request):
 		return render(request,'login.html')
   
 
-def online_regis(request):
+def online_registration(request):
 	''' View for online registeration form '''
 	if request.method == 'POST':
-		# print(request.POST)
 		form = OnlineForm(request.POST)
 		if form.is_valid():
 			temp = form.save()
 			user = ParticipantsOnline.objects.get(pk=temp.id)
-			zeal_id = 'ZO_'+str(temp.id)
+			zeal_id = 'ZO_{}'.format(str(temp.id))
 			user.zeal_id_temp = zeal_id
 			user.save()
 			return render(request, "thank_you.html", {'zeal_id':zeal_id})
@@ -181,7 +179,6 @@ def search(request):
 			search=request.POST.get('search')
 			try:
 				zeal_id_obj = ParticipantsOnline.objects.get(zeal_id_temp=search)
-				#print(zeal_id_obj.name,"123")
 				if ParticipantsDetail.objects.filter(email=zeal_id_obj.email):
 					if(request.user.groups.all()[0].name == 'others'):
 						 return render(request, 'search_online.html',{"error": "Email id or Mobile number already registered."})
@@ -193,7 +190,6 @@ def search(request):
 			zeal_id = ParticipantsOnline.objects.filter(zeal_id_temp=search).values_list()
 			if(request.user.groups.all()[0].name == 'others'):
 				return render(request, 'search_online.html',{"zeal_id": zeal_id})
-			# print(zeal_id)
 			return render(request,'register_online.html',{"zeal_id": zeal_id})
 		return render(request, 'search_online.html')
 	else:
