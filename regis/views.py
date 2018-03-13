@@ -349,7 +349,10 @@ def custom(request):
 		if request.method=="POST":
 			search=request.POST.get('search')
 			try:
-				zeal_id_obj=ParticipantsDetail.objects.get(email=search)
+				if request.POST.get('field') == 'email':
+					zeal_id_obj=ParticipantsDetail.objects.get(email=search)
+				elif request.POST.get('field') == 'ph_no':
+					zeal_id_obj=ParticipantsDetail.objects.get(contact=search)
 				# print zeal_id_obj.__dict__
 				if not 'print_id' in request.session or not request.session['print_id']:
 					request.session['print_id']=[str(zeal_id_obj.zeal_id)]

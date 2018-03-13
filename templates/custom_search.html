@@ -23,6 +23,23 @@
                         <label>Enter the Email Id:</label>
                         <input type="text" name="search" id="search" class="form-control">
                         <p class="help-block">Example: abc@gmail.com </p>
+                        <input type="hidden" name="field" value="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" id="submitbtn" name="submitbtn" class="col-lg-offset-1 btn btn-primary btn-lg" value="Search">
+                    </div>
+                </div>
+            </form>
+            <br>
+            <h1>OR</h1>
+            <form method="POST">
+                    {% csrf_token %}
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="form-group">
+                        <label>Enter the Phone Number</label>
+                        <input type="text" name="search" id="search" class="form-control">
+                        <p class="help-block">Example: 91231231456 </p>
+                        <input type="hidden" name="field" value="ph_no">
                     </div>
                     <div class="form-group">
                         <input type="submit" id="submitbtn" name="submitbtn" class="col-lg-offset-1 btn btn-primary btn-lg" value="Search">
