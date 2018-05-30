@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .forms import ParticipantsForm
+from .forms import ParticipantsForm, OnlineForm
 from regis.models import ParticipantsDetail, ParticipantsOnline, SearchOnline
 from profiles.models import UserDetail
 from transaction.models import Transaction
@@ -24,6 +24,23 @@ def index(request):
 	else:
 		return render(request,'login.html')
   
+
+def online_registration(request):
+	''' View for online registeration form '''
+	if request.method == 'POST':
+		form = OnlineForm(request.POST)
+		if form.is_valid():
+			temp = form.save()
+			user = ParticipantsOnline.objects.get(pk=temp.id)
+			zeal_id = 'ZO_{}'.format(str(temp.id))
+			user.zeal_id_temp = zeal_id
+			user.save()
+			return render(request, "thank_you.html", {'zeal_id':zeal_id})
+		else:
+			return render(request, "online.html", {'form':form})
+		return render(request, "online.html", {})
+	else:
+		return render(request, "online.html", {})
 
 
 def administrator(request):
@@ -172,7 +189,6 @@ def search(request):
 				return render(request, 'register_online.html', {'error': "Sorry, you have not registered online."})
 			zeal_id = ParticipantsOnline.objects.filter(zeal_id_temp=search).values_list()
 			if(request.user.groups.all()[0].name == 'others'):
-				print(zeal_id)
 				return render(request, 'search_online.html',{"zeal_id": zeal_id})
 			return render(request,'register_online.html',{"zeal_id": zeal_id})
 		return render(request, 'search_online.html')
@@ -291,8 +307,9 @@ def print_offline(request):
 		if not 'print_id' in request.session or not request.session['print_id']:
 			return render(request,'confirmed.html',{'error':1})
 		else:
+			zeal_id = request.session['print_id'][-1]
 			length=len(request.session['print_id'])
-			return render(request, 'confirmed.html', {'length':length})
+			return render(request, 'confirmed.html', {'length':length, 'zeal_id': zeal_id})
 	else:
 		return render(request, 'login.html')
 
@@ -304,8 +321,9 @@ def print_online(request):
 		if not 'print_id' in request.session or not request.session['print_id']:
 			return render(request,'confirmed.html',{'error':1})
 		else:
+			zeal_id = request.session['print_id'][-1]
 			length=len(request.session['print_id'])
-			return render(request, 'confirmed.html', {'length':length})
+			return render(request, 'confirmed.html', {'length':length, 'zeal_id': zeal_id})
 	else:
 		return render(request, 'login.html')
 

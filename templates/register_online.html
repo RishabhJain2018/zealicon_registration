@@ -17,7 +17,7 @@
                 {% if error %}
                     <h2>{{error}}<a href="/index/register">Click here</a> to register as a new participant.</h2>
                 {% else %}
-                <form role="form" method="POST" action="{% url 'online_register' %}" id="registerform">
+                <form role="form" method="POST" action="{% url 'online_register' %}">
                     {% csrf_token %}
                     <div class="form-group">
                         <label class="control-label" for ="name"> Name : </label>
